@@ -1,19 +1,22 @@
-import React from "react";
-import {
-  Link,
-  useRouteMatch,
-} from "react-router-dom";
+import React from 'react';
+import { Link } from 'react-router-dom';
 
-export default function Header(props) {
-
-    let match = useRouteMatch();
-
-    // class = back-bar
+export default function Header({ prev, next }) {
+  const className = prev && next ? '' : 'disabled-link';
+  // class = back-bar
   return (
-  <>
-        <Link to={`${match.url}/${props.next}`}>&larr;&nbsp;Newer</Link>
-        | <Link to="/">Home <small>[esc]</small></Link> |
-        <Link to={`${match.url}/${props.prev}`}>Older&nbsp;&rarr;</Link>
+    <>
+      <Link to={`/view/${next}`} className={className}>
+        &larr;&nbsp;Newer
+      </Link>{' '}
+      |{' '}
+      <Link to="/">
+        Home <small>[esc]</small>
+      </Link>{' '}
+      |{' '}
+      <Link to={`/view/${prev}`} className={className}>
+        Older&nbsp;&rarr;
+      </Link>
     </>
   );
 }

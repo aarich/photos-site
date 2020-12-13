@@ -1,15 +1,23 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import ImageTiles from './ImageTiles';
 import Jumbo from './Jumbo';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Pager from './Pager';
+import { ImageContext } from '../ImageContext';
 
 export default function ViewAll() {
-  const [images, setImages] = useState([]);
+  const images = useContext(ImageContext);
+
   const [header, setHeader] = useState(null);
   const [displayedImages, setDisplayedImages] = useState([]);
   const [page, setPage] = useState(0);
-  const pageSize = 3;
+  const pageSize = 4;
+
+  useEffect(() => {
+    if (images.length > 0) {
+      setHeader(images[0]);
+    }
+  }, [images]);
 
   useEffect(() => {
     const offset = pageSize * page;
@@ -18,8 +26,6 @@ export default function ViewAll() {
     setDisplayedImages(images.slice(start, end));
   }, [page, images]);
 
-  loadImageNames(setImages, setHeader);
-
   const totalPages = Math.ceil(images.length / pageSize);
 
   return (
@@ -27,22 +33,16 @@ export default function ViewAll() {
       {getHeader()}
       <Jumbo image={header} />
       {getAbout()}
-      {displayedImages.length > 0 && <ImageTiles images={displayedImages} />}
       {displayedImages.length > 0 && (
-        <Pager current={page} total={totalPages} setPage={setPage} />
+        <>
+          <Pager current={page} total={totalPages} setPage={setPage} />
+          <ImageTiles images={displayedImages} />
+          <Pager current={page} total={totalPages} setPage={setPage} />
+        </>
       )}
       {getFooter()}
     </>
   );
-}
-
-function loadImageNames(setImages, setHeader) {
-  new Promise(function (resolve, reject) {
-    setTimeout(() => resolve(['1', '2', '3', '4', '5', '6', '7', '8']), 2000);
-  }).then((result) => {
-    setImages(result);
-    setHeader(result[0]);
-  });
 }
 
 function getHeader() {
