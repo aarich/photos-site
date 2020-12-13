@@ -1,13 +1,158 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+div.body {
+  width: 100%;
+  height: 100%;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  color: #fff;
+  background-color: #000;
+  font-weight: 300;
+}
+html {
+  width: 100%;
+  height: 100%;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0 0 35px;
+  text-transform: uppercase;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+p {
+  margin: 0 0 25px;
+  font-size: 18px;
+  line-height: 1.5;
+}
+@media (min-width: 768px) {
+  p {
+    margin: 0 0 35px;
+    font-size: 20px;
+    line-height: 1.6;
+  }
+}
+section {
+  overflow: hidden;
+}
+a {
+  color: inherit;
+  -webkit-transition: all 0.2s ease-in-out;
+  -moz-transition: all 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out;
+}
+a:hover,
+a:focus {
+  text-decoration: none;
+  color: inherit;
+}
+li.nohighlight {
+  text-shadow: 2px 2px 8px #000;
+}
+li.nohighlight:hover {
+  color: #000;
+  text-shadow: none;
+}
+
+.light {
+  font-weight: 400;
+}
+.back-bar {
+  margin-bottom: 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+  text-transform: uppercase;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  background-color: #000;
+}
+.img-display img {
+  padding: 1% 0 5% 0;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+.intro {
+  display: table;
+  width: 100%;
+  height: 100%;
+  padding: 100px 0 100px 0;
+  text-align: center;
+  color: #fff;
+  vertical-align: middle;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  background-size: cover;
+  -o-background-size: cover;
+}
+
+.intro .title {
+  font-size: 50px;
+}
+
+a.down-arrow {
+  font-size: 100px;
+  font-weight: 500;
+}
+a.photo-link:hover img {
+  opacity: 0.75 !important;
+}
+.gallery ul {
+  padding: 0;
+  margin: 0;
+}
+
+.gallery img {
+  max-width: 100%;
+  height: auto;
+  padding: 0;
+  margin: 0;
+}
+.gallery ul li {
+  margin: 0;
+  position: relative;
+  list-style: none;
+  float: left;
+  padding: 0;
+}
+
+.gallery .wrapper {
+  display: relative;
+  text-align: center;
+}
+
+.gallery .wrapper:hover span:after {
+  content: 'Phone';
+}
+
+.gallery .wrapper .cam {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 25px;
+  font-weight: bold;
+  position: absolute;
+  right: 20%;
+  top: 80%;
+  visibility: visible;
+  position: absolute;
+  text-shadow: 0px 0px 8px #000;
+  visibility: visible;
+}
+
+p.credits {
+  font-size: 16px;
+  color: #aaa;
+}
+div.stats p {
+  font-size: 28px;
+  padding: 0 0 0;
+  margin-bottom: 0;
+}
+
+div.stats {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+  border-top: 1px solid rgba(255, 255, 255, 0.3);
 }
