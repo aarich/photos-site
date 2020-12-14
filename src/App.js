@@ -33,10 +33,7 @@ export default function App() {
 }
 
 function loadImageNames(setImages) {
-  console.log('LOADING IMAGES');
-  new Promise(function (resolve, reject) {
-    setTimeout(() => resolve(['1', '2', '3', '4', '5', '6', '7', '8']), 2000);
-  }).then((result) => {
-    setImages(result);
-  });
+  fetch('/images.php')
+    .then((response) => response.json())
+    .then((data) => setImages(data.images));
 }

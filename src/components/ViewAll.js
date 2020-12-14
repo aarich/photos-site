@@ -1,7 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import ImageTiles from './ImageTiles';
 import Jumbo from './Jumbo';
-import 'bootstrap/dist/css/bootstrap.min.css';
 import Pager from './Pager';
 import { ImageContext } from '../ImageContext';
 
@@ -11,7 +10,7 @@ export default function ViewAll() {
   const [header, setHeader] = useState(null);
   const [displayedImages, setDisplayedImages] = useState([]);
   const [page, setPage] = useState(0);
-  const pageSize = 4;
+  const pageSize = 12;
 
   useEffect(() => {
     if (images.length > 0) {
@@ -33,10 +32,14 @@ export default function ViewAll() {
       {getHeader()}
       <Jumbo image={header} />
       {getAbout()}
-      {displayedImages.length > 0 && (
+      {displayedImages.length === 0 ? (
+        <div style={{ minHeight: 400 * 2 }}></div>
+      ) : (
         <>
           <Pager current={page} total={totalPages} setPage={setPage} />
+          <br />
           <ImageTiles images={displayedImages} />
+          <br />
           <Pager current={page} total={totalPages} setPage={setPage} />
         </>
       )}
@@ -63,16 +66,11 @@ function getAbout() {
   return (
     <section id="about">
       <div className="container content-section text-center intro">
-        <div className="row">
-          <h2>I went outside once</h2>
-        </div>
-
-        <div className="row">
-          <p>
-            I enjoy hiking and stuff and then one time I bought an old DSLR
-            camera to capture things I see. Here are some of my favorites.
-          </p>
-        </div>
+        <h2>I went outside once</h2>
+        <p>
+          I enjoy hiking and stuff and then one time I bought an old DSLR camera
+          to capture things I see. Here are some of my favorites.
+        </p>
       </div>
     </section>
   );
@@ -80,7 +78,7 @@ function getAbout() {
 
 function getFooter() {
   const links = [
-    { h: '/feed', n: 'RSS' },
+    { h: '/feed.php', n: 'RSS' },
     { h: 'https://mrarich.com/contact', n: 'Contact' },
     { h: 'https://projects.mrarich.com', n: 'Projects' },
     { h: 'https://mrarich.com', n: 'Site Home' },
@@ -89,14 +87,14 @@ function getFooter() {
   return (
     <>
       <section>
-        <div className="container content-section text-center intro">
-          <div className="row">
-            <h2>Cool?</h2>
-            <p>
-              If you like any of the photos here, I'd love to hear about it! You
-              can also check out my projects if you like lame things that are
-              kinda nifty for a few seconds.
-            </p>
+        <div className="container content-section text-center">
+          <h2>Cool?</h2>
+          <p>
+            If you like any of the photos here, I'd love to hear about it! You
+            can also check out my projects if you like lame things that are
+            kinda nifty for a few seconds.
+          </p>
+          <div className=" d-flex justify-content-center intro">
             <ul className="list-inline">
               {links.map((item) => (
                 <li className="list-inline-item" key={item.n}>

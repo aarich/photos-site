@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { toName } from '../utils/utils';
 import { ImageContext } from '../ImageContext';
 
 export default function ImageExif({ image }) {
@@ -24,7 +25,7 @@ export default function ImageExif({ image }) {
           <ul className="list-inline">
             <li className="list-inline-item">
               <a
-                href={`%PUBLIC_URL%/img/${image}`}
+                href={toName(image)}
                 className="btn btnghost btn-lg"
                 target="_blank"
                 rel="noreferrer"
@@ -45,23 +46,9 @@ export default function ImageExif({ image }) {
 }
 
 function loadExifData(image, setExifData) {
-  console.log('LOADING EXIFDATA');
-  new Promise(function (resolve, reject) {
-    setTimeout(
-      () =>
-        resolve({
-          aperture: 'AP',
-          iso: 'ISO',
-          shutter: 'shu',
-          focal: 'foc',
-          date: 'sep 2019',
-          camera: 'canon',
-        }),
-      2000
-    );
-  }).then((result) => {
-    setExifData(result);
-  });
+  fetch(`/exif.php?img=${toName(image)}`)
+    .then((response) => response.json())
+    .then((data) => setExifData(data));
 }
 
 function showExifContent(exifData) {

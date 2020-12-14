@@ -1,5 +1,5 @@
 import React from 'react';
-import { Switch, Route, useRouteMatch } from 'react-router-dom';
+import { Switch, Route, useRouteMatch, useHistory } from 'react-router-dom';
 import ViewImage from './ViewImage';
 
 export default function View() {
@@ -12,9 +12,15 @@ export default function View() {
           <ViewImage base={match.path} />
         </Route>
         <Route path={match.path}>
-          <h3>you goofed</h3>
+          <ReturnHome />
         </Route>
       </Switch>
     </div>
   );
+}
+
+function ReturnHome() {
+  const history = useHistory();
+  history.push('/');
+  return null;
 }

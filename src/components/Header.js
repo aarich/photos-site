@@ -1,12 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-export default function Header({ prev, next }) {
-  const className = prev && next ? '' : 'disabled-link';
-  // class = back-bar
+export default function Header({ newer, older }) {
+  const className = older && newer ? '' : 'disabled-link';
+
   return (
-    <>
-      <Link to={`/view/${next}`} className={className}>
+    <div className="back-bar">
+      <Link to={`/view/${newer}`} className={className}>
         &larr;&nbsp;Newer
       </Link>{' '}
       |{' '}
@@ -14,9 +14,9 @@ export default function Header({ prev, next }) {
         Home <small>[esc]</small>
       </Link>{' '}
       |{' '}
-      <Link to={`/view/${prev}`} className={className}>
+      <Link to={`/view/${older}`} className={className}>
         Older&nbsp;&rarr;
       </Link>
-    </>
+    </div>
   );
 }

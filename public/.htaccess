@@ -1,0 +1,19 @@
+Options -MultiViews
+RewriteEngine On
+
+# Force HTTPS
+RewriteCond %{SERVER_PORT} 80
+RewriteCond ${HTTP_HOST} !^photos.dreamhost.com$
+RewriteRule ^(.*)$ https://photos.mrarich.com/$1 [R=301]
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^ index.html [QSA,L]
+
+# Rewrite Extension
+RewriteCond %{REQUEST_FILENAME}.php -f
+RewriteRule !.*\.php$ %{REQUEST_FILENAME}.php [QSA,L]
+
+# One month for most static assets
+<filesMatch ".(css|js)$">
+Header set Cache-Control "max-age=2628000, public"
+</filesMatch>
