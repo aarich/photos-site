@@ -38,6 +38,7 @@ export default function ViewAll() {
         <>
           <Pager current={page} total={totalPages} setPage={setPage} />
           <br />
+          <br />
           <ImageTiles images={displayedImages} />
           <br />
           <Pager current={page} total={totalPages} setPage={setPage} />
