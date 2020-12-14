@@ -82,6 +82,7 @@ function getFooter() {
     { h: 'https://mrarich.com/contact', n: 'Contact' },
     { h: 'https://projects.mrarich.com', n: 'Projects' },
     { h: 'https://mrarich.com', n: 'Site Home' },
+    { h: 'https://github.com/aarich/photos-site', n: 'Source Code' },
   ];
 
   return (
