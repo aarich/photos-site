@@ -3,6 +3,7 @@ import ImageTiles from './ImageTiles';
 import Jumbo from './Jumbo';
 import Pager from './Pager';
 import { ImageContext } from '../ImageContext';
+import Footer from './Footer';
 
 export default function ViewAll({ headerImage }) {
   const images = useContext(ImageContext);
@@ -36,7 +37,6 @@ export default function ViewAll({ headerImage }) {
       ) : (
         <>
           <Pager current={page} total={totalPages} setPage={setPageAndScroll} />
-          <br />
           <br ref={tilesRef} />
           <ImageTiles images={displayedImages} />
           <br />
@@ -98,7 +98,12 @@ function getFooter() {
           <ul className="list-inline">
             {links.map((item) => (
               <li className="list-inline-item" key={item.n}>
-                <a href={item.h} className="btn btn-lg">
+                <a
+                  href={item.h}
+                  className="btn btn-lg"
+                  target="_blank"
+                  rel="noreferrer"
+                >
                   {item.n}
                 </a>
               </li>
@@ -107,11 +112,7 @@ function getFooter() {
         </div>
       </section>
 
-      <footer>
-        <div className="container text-center">
-          <p className="credits">&copy; {new Date().getFullYear()} Alex Rich</p>
-        </div>
-      </footer>
+      <Footer />
     </>
   );
 }

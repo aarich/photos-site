@@ -4,6 +4,7 @@ import { ImageContext } from '../ImageContext';
 import Header from './Header';
 import ImageExif from './ImageExif';
 import { toName } from '../utils/Utils';
+import Footer from './Footer';
 
 export default function ViewImage() {
   const images = useContext(ImageContext);
@@ -51,6 +52,7 @@ export default function ViewImage() {
         <img src={src} alt="display" />
       </div>
       <ImageExif image={image} />
+      <Footer />
     </div>
   );
 }

@@ -19,9 +19,9 @@ export default function ImageExif({ image }) {
 
   return (
     <section>
-      <div className="container content-section text-center intro">
-        {showExifContent(exifData)}
-        <ul className="list-inline">
+      <div className="container content-section text-center">
+        {getExifContent(exifData)}
+        <ul className="list-inline intro">
           <li className="list-inline-item">
             <a
               href={'/' + toName(image)}
@@ -43,13 +43,17 @@ export default function ImageExif({ image }) {
   );
 }
 
+/**
+ * TODO cache this, even though it's fast
+ */
 function loadExifData(image, setExifData) {
+  setExifData(null);
   fetch(`/exif.php?img=${toName(image)}`)
     .then((response) => response.json())
     .then((data) => setExifData(data));
 }
 
-function showExifContent(exifData) {
+function getExifContent(exifData) {
   if (!exifData) {
     return <p>Loading image data...</p>;
   }
