@@ -1,5 +1,6 @@
 <?php 
 header('Content-Type: application/json');
+header('Cache-control: max-age=60');
 
 date_default_timezone_set("America/Los_Angeles");
 $img = $_GET['img'];
