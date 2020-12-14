@@ -3,6 +3,10 @@ import { Link } from 'react-router-dom';
 import { toName, chooseRandom } from '../utils/Utils';
 import { ImageContext } from '../ImageContext';
 
+/**
+ * Loads EXIF data as well as links to original + random
+ * @param {String} props id of image
+ */
 export default function ImageExif({ image }) {
   const [exifData, setExifData] = useState(null);
   const [randomImage, setRandomImage] = useState('');

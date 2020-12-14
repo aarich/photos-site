@@ -6,33 +6,32 @@ $newH = $_GET['h'];
 
 $oldImage = imagecreatefromjpeg($img);
 
-
 $swap = false;
-  if (function_exists('exif_read_data')) {
-    $exif = @exif_read_data($img);
-    if($exif && isset($exif['Orientation'])) {
-      $orientation = $exif['Orientation'];
-      if($orientation != 1){
-        $deg = 0;
-        switch ($orientation) {
-          case 3:
-            $deg = 180;
-            break;
-          case 6:
-            $deg = 270;
-            break;
-          case 8:
-            $deg = 90;
-            break;
-        }
-        if ($deg) {
-       	  ini_set('memory_limit', '-1');
-          $oldImage = imagerotate($oldImage, $deg, 0);        
-          $swap = true;
-        }
-      } // if there is some rotation necessary
-    } // if have the exif orientation info
-  } // if function exists  
+if (function_exists('exif_read_data')) {
+  $exif = @exif_read_data($img);
+  if($exif && isset($exif['Orientation'])) {
+    $orientation = $exif['Orientation'];
+    if($orientation != 1){
+      $deg = 0;
+      switch ($orientation) {
+        case 3:
+          $deg = 180;
+          break;
+        case 6:
+          $deg = 270;
+          break;
+        case 8:
+          $deg = 90;
+          break;
+      }
+      if ($deg) {
+        ini_set('memory_limit', '-1');
+        $oldImage = imagerotate($oldImage, $deg, 0);        
+        $swap = true;
+      }
+    } // if there is some rotation necessary
+  } // if have the exif orientation info
+} // if function exists  
 
 if ($swap) {
 	list($height, $width) = getimagesize($img);
@@ -67,11 +66,9 @@ if ($smallerWidth > $width) {
 	$y = 0;
 }
 
-// imagecopyresampled(dst_image, src_image, dst_x, dst_y, src_x, src_y, dst_w, dst_h, src_w, src_h)
 $thumb = imagecreatetruecolor($newW, $newH);
 imagecopyresampled($thumb, $oldImage, 0, 0, $x, $y, $newW, $newH, $smallerWidth, $smallerHeight);
 
-//final output
 header('Content-type: image/jpeg');
 header('Cache-control: max-age='.(60*60*24*14));
 imagejpeg($thumb);

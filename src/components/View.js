@@ -2,6 +2,9 @@ import React from 'react';
 import { Switch, Route, useRouteMatch, useHistory } from 'react-router-dom';
 import ViewImage from './ViewImage';
 
+/**
+ * View to route to an image
+ */
 export default function View() {
   let match = useRouteMatch();
 

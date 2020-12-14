@@ -6,6 +6,9 @@ import ImageExif from './ImageExif';
 import { toName } from '../utils/Utils';
 import Footer from './Footer';
 
+/**
+ * View a single image and its data
+ */
 export default function ViewImage() {
   const images = useContext(ImageContext);
   let { image } = useParams();

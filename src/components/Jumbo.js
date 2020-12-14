@@ -1,6 +1,10 @@
 import React from 'react';
 import { toName } from '../utils/Utils';
 
+/**
+ * Contains page title and a link to the #about section for quick scroll
+ * @param {object} props - id of photo chosen to be background
+ */
 export default function Jumbo({ image }) {
   const url = `/crop.php?img=${toName(image)}&w=1600&h=1400`;
   const style = {

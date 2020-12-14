@@ -1,5 +1,12 @@
 import React from 'react';
 
+/**
+ * List of page numbers. Selecting any page jumps directly to it
+ * @param {object} props a list of numerical buttons
+ *  - setPage: callback function
+ *  - current: the current page number (zero-based)
+ *  - total: number of pages.
+ */
 export default function Pager({ setPage, current, total }) {
   const selected = 'btn-secondary';
   const unselected = 'btn-outline-secondary';

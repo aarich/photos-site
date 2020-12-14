@@ -1,6 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
+/**
+ * Navigation header
+ * @param {Object} props - {newer, older} ids of neighboring photos
+ */
 export default function Header({ newer, older }) {
   const className = older && newer ? '' : 'disabled-link';
 

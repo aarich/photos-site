@@ -2,6 +2,10 @@ import React from 'react';
 import { toName } from '../utils/Utils';
 import { Link } from 'react-router-dom';
 
+/**
+ * A single tile containing and linking to an image
+ * @param {String} props {image} id
+ */
 export default function ImageTile({ image }) {
   return (
     <li className="col-md-4">

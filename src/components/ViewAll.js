@@ -5,6 +5,10 @@ import Pager from './Pager';
 import { ImageContext } from '../ImageContext';
 import Footer from './Footer';
 
+/**
+ * The gallery view of all the images
+ * @param {object} props - headerImage: the chosen image to display as hero
+ */
 export default function ViewAll({ headerImage }) {
   const images = useContext(ImageContext);
 

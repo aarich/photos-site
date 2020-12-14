@@ -1,4 +1,6 @@
 <?php 
+session_start();
+
 header('Content-Type: application/json');
 header('Cache-control: max-age=60');
 

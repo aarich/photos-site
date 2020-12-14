@@ -1,5 +1,8 @@
 import React from 'react';
 
+/**
+ * Simple copyright component
+ */
 export default function Footer() {
   return (
     <footer>
