@@ -1,5 +1,7 @@
 # Simple Photo Gallery in React + Apache Http Server
 
+![Build](https://github.com/aarich/photos-site/workflows/Build/badge.svg)
+
 [Live example](https://photos.mrarich.com)
 
 ## Usage
