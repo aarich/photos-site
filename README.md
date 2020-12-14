@@ -1,4 +1,4 @@
-# Simple Photo Viewer in React + Apache
+# Simple Photo Gallery in React + Apache Http Server
 
 [Live example](https://photos.mrarich.com)
 
