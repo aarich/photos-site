@@ -4,12 +4,14 @@ import './App.css';
 import View from './components/View';
 import ViewAll from './components/ViewAll';
 import { ImageContext } from './ImageContext';
+import { chooseRandom } from './utils/utils';
 
 export default function App() {
   const [images, setImages] = useState([]);
+  const [header, setHeader] = useState('');
 
   useEffect(() => {
-    loadImageNames(setImages);
+    loadImageNames(setImages, setHeader);
   }, []);
 
   document.title = 'Photos By Alex';
@@ -23,7 +25,7 @@ export default function App() {
               <View />
             </Route>
             <Route path="/">
-              <ViewAll />
+              <ViewAll headerImage={header} />
             </Route>
           </Switch>
         </div>
@@ -32,8 +34,11 @@ export default function App() {
   );
 }
 
-function loadImageNames(setImages) {
+function loadImageNames(setImages, setHeader) {
   fetch('/images.php')
     .then((response) => response.json())
-    .then((data) => setImages(data.images));
+    .then((data) => {
+      setImages(data.images);
+      setHeader(chooseRandom(data.images));
+    });
 }

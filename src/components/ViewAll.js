@@ -1,22 +1,15 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect, useRef, useState } from 'react';
 import ImageTiles from './ImageTiles';
 import Jumbo from './Jumbo';
 import Pager from './Pager';
 import { ImageContext } from '../ImageContext';
 
-export default function ViewAll() {
+export default function ViewAll({ headerImage }) {
   const images = useContext(ImageContext);
 
-  const [header, setHeader] = useState(null);
   const [displayedImages, setDisplayedImages] = useState([]);
   const [page, setPage] = useState(0);
   const pageSize = 12;
-
-  useEffect(() => {
-    if (images.length > 0) {
-      setHeader(images[0]);
-    }
-  }, [images]);
 
   useEffect(() => {
     const offset = pageSize * page;
@@ -26,22 +19,28 @@ export default function ViewAll() {
   }, [page, images]);
 
   const totalPages = Math.ceil(images.length / pageSize);
+  const tilesRef = useRef(null);
+
+  const setPageAndScroll = (newPage) => {
+    setPage(newPage);
+    tilesRef.current.scrollIntoViewIfNeeded();
+  };
 
   return (
     <>
       {getHeader()}
-      <Jumbo image={header} />
+      <Jumbo image={headerImage} />
       {getAbout()}
       {displayedImages.length === 0 ? (
         <div style={{ minHeight: 400 * 2 }}></div>
       ) : (
         <>
-          <Pager current={page} total={totalPages} setPage={setPage} />
+          <Pager current={page} total={totalPages} setPage={setPageAndScroll} />
           <br />
-          <br />
+          <br ref={tilesRef} />
           <ImageTiles images={displayedImages} />
           <br />
-          <Pager current={page} total={totalPages} setPage={setPage} />
+          <Pager current={page} total={totalPages} setPage={setPageAndScroll} />
         </>
       )}
       {getFooter()}
@@ -88,27 +87,25 @@ function getFooter() {
   return (
     <>
       <section>
-        <div className="container content-section text-center">
+        <div className="container content-section intro">
           <h2>Cool?</h2>
           <p>
             If you like any of the photos here, I'd love to hear about it! You
             can also check out my projects if you like lame things that are
             kinda nifty for a few seconds.
           </p>
-          <div className=" d-flex justify-content-center intro">
-            <ul className="list-inline">
-              {links.map((item) => (
-                <li className="list-inline-item" key={item.n}>
-                  <a href={item.h} className="btn btnghost btn-lg">
-                    {item.n}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
+          <ul className="list-inline">
+            {links.map((item) => (
+              <li className="list-inline-item" key={item.n}>
+                <a href={item.h} className="btn btn-lg">
+                  {item.n}
+                </a>
+              </li>
+            ))}
+          </ul>
         </div>
       </section>
-      <div id="loading"></div>
+
       <footer>
         <div className="container text-center">
           <p className="credits">&copy; {new Date().getFullYear()} Alex Rich</p>

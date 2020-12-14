@@ -149,6 +149,7 @@ a.photo-link:hover img {
 p.credits {
   font-size: 16px;
   color: #aaa;
+  padding-bottom: 2em;
 }
 div.stats p {
   font-size: 28px;

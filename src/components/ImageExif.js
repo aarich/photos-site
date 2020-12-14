@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { toName } from '../utils/utils';
+import { toName, chooseRandom } from '../utils/utils';
 import { ImageContext } from '../ImageContext';
 
 export default function ImageExif({ image }) {
@@ -19,27 +19,25 @@ export default function ImageExif({ image }) {
 
   return (
     <section>
-      <div className="container content-section text-center">
+      <div className="container content-section text-center intro">
         {showExifContent(exifData)}
-        <div className="row">
-          <ul className="list-inline">
-            <li className="list-inline-item">
-              <a
-                href={toName(image)}
-                className="btn btnghost btn-lg"
-                target="_blank"
-                rel="noreferrer"
-              >
-                Direct Link
-              </a>
-            </li>
-            <li className="list-inline-item">
-              <Link to={`/view/${randomImage}`} className="btn btnghost btn-lg">
-                Random photo
-              </Link>
-            </li>
-          </ul>
-        </div>
+        <ul className="list-inline">
+          <li className="list-inline-item">
+            <a
+              href={'/' + toName(image)}
+              className="btn btn-lg"
+              target="_blank"
+              rel="noreferrer"
+            >
+              Direct Link
+            </a>
+          </li>
+          <li className="list-inline-item">
+            <Link to={`/view/${randomImage}`} className="btn btn-lg">
+              Random photo
+            </Link>
+          </li>
+        </ul>
       </div>
     </section>
   );
@@ -64,11 +62,9 @@ function showExifContent(exifData) {
 
   return (
     <>
-      <div className="row">
-        <p className="text-center">
-          Shot in {exifData.date} with a {exifData.camera}.
-        </p>
-      </div>
+      <p className="text-center">
+        Shot in {exifData.date} with a {exifData.camera}.
+      </p>
       <div className="row">
         {dataPoints.map((key) => {
           return (
@@ -83,10 +79,5 @@ function showExifContent(exifData) {
 }
 
 function chooseRandomImage(image, images, setImage) {
-  const currentIndex = images.indexOf(image);
-  let index = currentIndex;
-  while (index === currentIndex) {
-    index = Math.floor(Math.random() * images.length);
-  }
-  setImage(images[index]);
+  setImage(chooseRandom(images, image));
 }

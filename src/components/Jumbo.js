@@ -5,7 +5,9 @@ export default function Jumbo({ image }) {
   const url = `/crop.php?img=${toName(image)}&w=1600&h=1400`;
   const style = {
     backgroundImage: `radial-gradient(circle at 50% 50%,rgba(0,0,0,0.35),rgba(0,0,0,0.66)),url('${url}')`,
+    minHeight: Math.min(window.innerHeight, 1400),
   };
+
   return (
     <header className="intro" style={style}>
       <div className="intro-body">
