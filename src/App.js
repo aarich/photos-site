@@ -4,7 +4,7 @@ import './App.css';
 import View from './components/View';
 import ViewAll from './components/ViewAll';
 import { ImageContext } from './ImageContext';
-import { chooseRandom } from './utils/utils';
+import { chooseRandom } from './utils/Utils';
 
 export default function App() {
   const [images, setImages] = useState([]);

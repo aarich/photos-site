@@ -3,7 +3,7 @@ import { useHistory, useParams } from 'react-router-dom';
 import { ImageContext } from '../ImageContext';
 import Header from './Header';
 import ImageExif from './ImageExif';
-import { toName } from '../utils/utils';
+import { toName } from '../utils/Utils';
 
 export default function ViewImage() {
   const images = useContext(ImageContext);

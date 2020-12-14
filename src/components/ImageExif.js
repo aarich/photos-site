@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { toName, chooseRandom } from '../utils/utils';
+import { toName, chooseRandom } from '../utils/Utils';
 import { ImageContext } from '../ImageContext';
 
 export default function ImageExif({ image }) {

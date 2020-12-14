@@ -1,5 +1,5 @@
 import React from 'react';
-import { toName } from '../utils/utils';
+import { toName } from '../utils/Utils';
 
 export default function Jumbo({ image }) {
   const url = `/crop.php?img=${toName(image)}&w=1600&h=1400`;

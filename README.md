@@ -3,12 +3,15 @@
 [Live example](https://photos.mrarich.com)
 
 ## Usage
-* Add an `img` directory in the `public` folder. The images should look like `IMG_XXXX.JPG` initially, but that format can be updated in the [`Utils.js`](src/utils/Utils.js) file.
-* Run `yarn build`
-* Copy build directory to apache webserver (update .htaccess)
+
+- Add an `img` directory in the `public` folder. The images should look like `IMG_XXXX.JPG` initially, but that format can be updated in the [`Utils.js`](src/utils/Utils.js) file.
+- Update [`manifest.json`](public/manifest.json)
+- Run `yarn build`
+- Copy build directory to apache webserver (update `.htaccess`)
 
 ## Thanks
- * [Create React App](https://github.com/facebook/create-react-app). (Documentation below)
+
+- [Create React App](https://github.com/facebook/create-react-app). (Documentation below)
 
 ## Available Scripts
 

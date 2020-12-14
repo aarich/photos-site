@@ -1,5 +1,5 @@
 import React from 'react';
-import { toName } from '../utils/utils';
+import { toName } from '../utils/Utils';
 import { Link } from 'react-router-dom';
 
 export default function ImageTile({ image }) {
