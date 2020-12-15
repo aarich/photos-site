@@ -20,6 +20,9 @@ This was originally built for [photos.mrarich.com](https://photos.mrarich.com), 
   - The images should match `IMG_XXXX.JPG`. The format can be updated in [`Utils.js`](src/utils/Utils.js).
 - Update [`manifest.json`](public/manifest.json)
 - Update [links throughout](https://github.com/aarich/photos-site/search?q=mrarich)
+- Update [`.env`](/.env)
+- Update logos in `public`
+- Update `favicon.ico`
 - Run `yarn build`
 - Copy output build directory to apache webserver
 

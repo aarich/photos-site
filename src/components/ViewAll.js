@@ -4,32 +4,61 @@ import Jumbo from './Jumbo';
 import Pager from './Pager';
 import { ImageContext } from '../ImageContext';
 import Footer from './Footer';
+import history from '../utils/History';
+import { PAGE_SIZE } from '../utils/Utils';
 
 /**
  * The gallery view of all the images
  * @param {object} props - headerImage: the chosen image to display as hero
  */
-export default function ViewAll({ headerImage }) {
+export default function ViewAll({ headerImage, scrollY, setScrollY }) {
   const images = useContext(ImageContext);
-
+  const [page, setPage] = useState(getPageParam() - 1);
   const [displayedImages, setDisplayedImages] = useState([]);
-  const [page, setPage] = useState(0);
-  const pageSize = 12;
 
   useEffect(() => {
-    const offset = pageSize * page;
+    if (images.length > 0 && page > Math.ceil(images.length / PAGE_SIZE)) {
+      setPage(0);
+    }
+
+    const offset = PAGE_SIZE * page;
     const start = Math.min(offset, images.length);
-    const end = Math.min(offset + pageSize, images.length + 1);
+    const end = Math.min(offset + PAGE_SIZE, images.length + 1);
     setDisplayedImages(images.slice(start, end));
   }, [page, images]);
 
-  const totalPages = Math.ceil(images.length / pageSize);
+  const totalPages = Math.ceil(images.length / PAGE_SIZE);
   const tilesRef = useRef(null);
 
   const setPageAndScroll = (newPage) => {
     setPage(newPage);
     tilesRef.current.scrollIntoViewIfNeeded();
+
+    setURLParams(newPage);
   };
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const position = window.pageYOffset;
+      setScrollY(position);
+    };
+    window.addEventListener('scroll', handleScroll, { passive: true });
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, [setScrollY]);
+
+  useEffect(() => {
+    window.scrollTo(0, scrollY);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  useEffect(() => {
+    return history.listen(() => {
+      setPage(getPageParam() - 1);
+    });
+  }, []);
 
   return (
     <>
@@ -50,6 +79,35 @@ export default function ViewAll({ headerImage }) {
       {getFooter()}
     </>
   );
+}
+
+/**
+ * @returns user friendly page number (exact url param)
+ */
+function getPageParam() {
+  let p = new URLSearchParams(history.location.search).get('p');
+  return Number.parseInt(p) || 1;
+}
+
+function setURLParams(newPage) {
+  const urlParams = new URLSearchParams(window.location.search);
+  const current = urlParams.get('p');
+
+  const newPageUserFriendly = newPage + 1;
+  try {
+    if (current && newPageUserFriendly === Number.parseInt(current)) {
+      return;
+    }
+  } catch (e) {
+    // Doesn't matter
+  }
+
+  if (newPageUserFriendly === 1) {
+    urlParams.delete('p');
+  } else {
+    urlParams.set('p', newPageUserFriendly);
+  }
+  history.push(window.location.pathname + '?' + urlParams.toString());
 }
 
 function getHeader() {

@@ -1,10 +1,11 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { useHistory, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { ImageContext } from '../ImageContext';
 import Header from './Header';
 import ImageExif from './ImageExif';
-import { toName } from '../utils/Utils';
+import { PAGE_SIZE, toName } from '../utils/Utils';
 import Footer from './Footer';
+import history from '../utils/History';
 
 /**
  * View a single image and its data
@@ -14,7 +15,7 @@ export default function ViewImage() {
   let { image } = useParams();
   const [newer, setNewer] = useState('');
   const [older, setOlder] = useState('');
-  const history = useHistory();
+  const [page, setPage] = useState(0);
 
   useEffect(() => {
     if (images.length === 0) {
@@ -25,13 +26,13 @@ export default function ViewImage() {
       history.push('/');
     }
 
-    setLinks(setNewer, setOlder, image, images);
-  }, [image, images, history]);
+    setLinks(setNewer, setOlder, setPage, image, images);
+  }, [image, images]);
 
   useEffect(() => {
     const handler = (e) => {
       if (e.key === 'Escape') {
-        history.push('/');
+        history.push(`/?p=${page}`);
       } else if (e.key === 'ArrowLeft') {
         history.push(`/view/${newer}`);
       } else if (e.key === 'ArrowRight') {
@@ -42,7 +43,7 @@ export default function ViewImage() {
     document.body.addEventListener('keyup', handler);
 
     return () => document.body.removeEventListener('keyup', handler);
-  }, [history, newer, older]);
+  }, [newer, older, page]);
 
   const w = window.innerWidth;
   const h = window.innerHeight;
@@ -50,7 +51,7 @@ export default function ViewImage() {
 
   return (
     <div>
-      <Header newer={newer} older={older} />
+      <Header newer={newer} older={older} page={page} />
       <div className="img-display">
         <img src={src} alt="display" />
       </div>
@@ -60,11 +61,15 @@ export default function ViewImage() {
   );
 }
 
-function setLinks(setNewer, setOlder, image, images) {
+function setLinks(setNewer, setOlder, setPage, image, images) {
   const currentIndex = images.indexOf(image);
+
   const newer = currentIndex - 1;
   const older = currentIndex + 1;
 
   setNewer(images[newer < 0 ? images.length - 1 : newer]);
   setOlder(images[older >= images.length ? 0 : older]);
+
+  // Figure out what page this image is on
+  setPage(Math.floor(currentIndex / PAGE_SIZE) + 1);
 }

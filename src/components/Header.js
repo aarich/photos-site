@@ -3,9 +3,11 @@ import { Link } from 'react-router-dom';
 
 /**
  * Navigation header
- * @param {Object} props - {newer, older} ids of neighboring photos
+ * @param {Object} props properties
+ * - {newer, older} ids of neighboring photos
+ * - page the page this image is on
  */
-export default function Header({ newer, older }) {
+export default function Header({ newer, older, page }) {
   const className = older && newer ? '' : 'disabled-link';
 
   return (
@@ -14,7 +16,7 @@ export default function Header({ newer, older }) {
         &larr;&nbsp;Newer
       </Link>{' '}
       |{' '}
-      <Link to="/">
+      <Link to={`/?p=${page}`}>
         Home <small>[esc]</small>
       </Link>{' '}
       |{' '}

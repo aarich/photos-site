@@ -20,9 +20,9 @@ $camera = $exif["IFD0"]["Model"];
 $a = substr($camera, 0, 1) === "i" ? "an" : "a";
 
 $result->aperture = $aperture;
-$result->iso = $iso;
-$result->shutter = $shutter;
-$result->focal = $focal;
+$result->iso = "ISO".$iso;
+$result->shutter = $shutter." s";
+$result->focal = $focal." mm";
 $result->date = $date;
 $result->camera = $camera;
 $result->success = true;

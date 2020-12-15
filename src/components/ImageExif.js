@@ -53,8 +53,16 @@ export default function ImageExif({ image }) {
 function loadExifData(image, setExifData) {
   setExifData(null);
   fetch(`/exif.php?img=${toName(image)}`)
-    .then((response) => response.json())
-    .then((data) => setExifData(data));
+    .then((response) => response.text())
+    .then((text) => {
+      let data;
+      try {
+        data = JSON.parse(text);
+      } catch (err) {
+        data = { error: 'Failed to parse EXIF data.' };
+      }
+      setExifData(data);
+    });
 }
 
 function getExifContent(exifData) {

@@ -1,31 +1,36 @@
 import React, { useEffect, useState } from 'react';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import { Router, Switch, Route } from 'react-router-dom';
 import './App.css';
 import View from './components/View';
 import ViewAll from './components/ViewAll';
 import { ImageContext } from './ImageContext';
-import { chooseRandom } from './utils/Utils';
+import { chooseRandom, isDevMode } from './utils/Utils';
+import history from './utils/History.js';
 
 export default function App() {
+  // Constants throughout the app
   const [images, setImages] = useState([]);
   const [header, setHeader] = useState('');
+  const [scrollY, setScrollY] = useState(0);
 
   useEffect(() => {
     loadImageNames(setImages, setHeader);
   }, []);
 
-  document.title = 'Photos By Alex';
-
   return (
     <ImageContext.Provider value={images}>
-      <Router>
+      <Router history={history}>
         <div className="body">
           <Switch>
             <Route path="/view">
               <View />
             </Route>
             <Route path="/">
-              <ViewAll headerImage={header} />
+              <ViewAll
+                headerImage={header}
+                scrollY={scrollY}
+                setScrollY={setScrollY}
+              />
             </Route>
           </Switch>
         </div>
@@ -35,10 +40,27 @@ export default function App() {
 }
 
 function loadImageNames(setImages, setHeader) {
-  fetch('/images.php')
-    .then((response) => response.json())
-    .then((data) => {
-      setImages(data.images);
-      setHeader(chooseRandom(data.images));
+  if (isDevMode()) {
+    new Promise(function (resolve, reject) {
+      setTimeout(
+        () =>
+          resolve(
+            Array(30)
+              .fill()
+              .map((_, i) => '' + i)
+          ),
+        2000
+      );
+    }).then((result) => {
+      setImages(result);
+      setHeader(result[0]);
     });
+  } else {
+    fetch('/images.php', { cache: 'no-cache' })
+      .then((response) => response.json())
+      .then((data) => {
+        setImages(data.images);
+        setHeader(chooseRandom(data.images));
+      });
+  }
 }
