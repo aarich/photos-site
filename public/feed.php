@@ -18,18 +18,24 @@ echo "<".'?xml version="1.0" encoding="utf-8"?'.">\n";
 	<title>Alex Rich's Image Feed</title>
 	<link><?php echo $baseUrl; ?></link>
 	<description>Photos by Alex</description>
-	<atom:link href="<?php echo $baseUrl; ?>/feed" rel="self" type="application/rss+xml" />
+	<atom:link href="<?php echo $baseUrl; ?>/feed.php" rel="self" type="application/rss+xml" />
 
 <?php
 date_default_timezone_set("America/Los_Angeles");
 $img_dir = "img";
 $imgs = array_filter(glob($img_dir.'/*.*'), 'is_file');
 $imgs = array_reverse($imgs);
+
+function cleanName($name) {
+    $start = strlen('img/IMG_');
+    return substr($name, $start, 4);
+}
+
 foreach($imgs as $img) {
 	$exif = @exif_read_data($img, 0, true);
 	$date = date("D, d M Y H:i:s T", strtotime($exif["EXIF"]["DateTimeOriginal"]));
 	$title = date('D, F j Y', strtotime($exif["EXIF"]["DateTimeOriginal"]));
-	$link = $baseUrl . "/view?img=".$img;
+	$link = $baseUrl . "/view/".cleanName($img);
 	$guid = $link;
 	$directLink = $baseUrl . "/" . $img;
 	$desc = "<![CDATA[<img src=".$directLink." alt=\"\"/>]]>";
