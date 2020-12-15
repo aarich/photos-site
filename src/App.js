@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { Router, Switch, Route } from 'react-router-dom';
-import './App.css';
+import { Route, Router, Switch } from 'react-router-dom';
+
 import View from './components/View';
 import ViewAll from './components/ViewAll';
 import { ImageContext } from './ImageContext';
-import { chooseRandom, isDevMode } from './utils/utils';
 import history from './utils/history.js';
+import { chooseRandom, isDevMode } from './utils/utils';
 
 export default function App() {
   // Constants throughout the app

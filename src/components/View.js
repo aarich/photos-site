@@ -1,5 +1,6 @@
 import React from 'react';
-import { Switch, Route, useRouteMatch, useHistory } from 'react-router-dom';
+import { Route, Switch, useHistory, useRouteMatch } from 'react-router-dom';
+
 import ViewImage from './ViewImage';
 
 /**

@@ -1,11 +1,12 @@
 import React, { useContext, useEffect, useRef, useState } from 'react';
+
+import { ImageContext } from '../ImageContext';
+import history from '../utils/history';
+import { PAGE_SIZE } from '../utils/utils';
+import Footer from './Footer';
 import ImageTiles from './ImageTiles';
 import Jumbo from './Jumbo';
 import Pager from './Pager';
-import { ImageContext } from '../ImageContext';
-import Footer from './Footer';
-import history from '../utils/history';
-import { PAGE_SIZE } from '../utils/utils';
 
 /**
  * The gallery view of all the images

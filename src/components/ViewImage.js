@@ -1,11 +1,12 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+
 import { ImageContext } from '../ImageContext';
-import Header from './Header';
-import ImageExif from './ImageExif';
+import history from '../utils/history';
 import { PAGE_SIZE, toName } from '../utils/utils';
 import Footer from './Footer';
-import history from '../utils/history';
+import Header from './Header';
+import ImageExif from './ImageExif';
 
 /**
  * View a single image and its data

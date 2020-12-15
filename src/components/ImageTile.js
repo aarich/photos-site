@@ -1,6 +1,7 @@
 import React from 'react';
-import { isDevMode, toName } from '../utils/utils';
 import { Link } from 'react-router-dom';
+
+import { isDevMode, toName } from '../utils/utils';
 
 /**
  * A single tile containing and linking to an image

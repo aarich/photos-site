@@ -1,7 +1,8 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { toName, chooseRandom } from '../utils/utils';
+
 import { ImageContext } from '../ImageContext';
+import { chooseRandom, toName } from '../utils/utils';
 
 /**
  * Loads EXIF data as well as links to original + random
