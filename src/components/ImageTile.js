@@ -1,5 +1,5 @@
 import React from 'react';
-import { isDevMode, toName } from '../utils/Utils';
+import { isDevMode, toName } from '../utils/utils';
 import { Link } from 'react-router-dom';
 
 /**

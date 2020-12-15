@@ -1,5 +1,5 @@
 import React from 'react';
-import { toName } from '../utils/Utils';
+import { toName } from '../utils/utils';
 
 /**
  * Contains page title and a link to the #about section for quick scroll

@@ -4,8 +4,8 @@ import './App.css';
 import View from './components/View';
 import ViewAll from './components/ViewAll';
 import { ImageContext } from './ImageContext';
-import { chooseRandom, isDevMode } from './utils/Utils';
-import history from './utils/History.js';
+import { chooseRandom, isDevMode } from './utils/utils';
+import history from './utils/history.js';
 
 export default function App() {
   // Constants throughout the app

@@ -4,8 +4,8 @@ import Jumbo from './Jumbo';
 import Pager from './Pager';
 import { ImageContext } from '../ImageContext';
 import Footer from './Footer';
-import history from '../utils/History';
-import { PAGE_SIZE } from '../utils/Utils';
+import history from '../utils/history';
+import { PAGE_SIZE } from '../utils/utils';
 
 /**
  * The gallery view of all the images

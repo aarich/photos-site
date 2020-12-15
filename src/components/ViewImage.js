@@ -3,9 +3,9 @@ import { useParams } from 'react-router-dom';
 import { ImageContext } from '../ImageContext';
 import Header from './Header';
 import ImageExif from './ImageExif';
-import { PAGE_SIZE, toName } from '../utils/Utils';
+import { PAGE_SIZE, toName } from '../utils/utils';
 import Footer from './Footer';
-import history from '../utils/History';
+import history from '../utils/history';
 
 /**
  * View a single image and its data
