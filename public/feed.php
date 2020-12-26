@@ -10,7 +10,7 @@ header('Cache-control: max-age=60');
 
 $baseUrl = "https://photos.mrarich.com";
 
-echo "<".'?xml version="1.0" encoding="utf-8"?'.">\n";
+echo '<?xml version="1.0" encoding="utf-8"?'.">\n";
 ?>
 
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
@@ -40,20 +40,8 @@ foreach($imgs as $img) {
 	$directLink = $baseUrl . "/" . $img;
 	$desc = "<![CDATA[<img src=".$directLink." alt=\"\"/>]]>";
 ?>
-
-	<item>
-		<title><?php echo $title; ?></title>
-		<link><?php echo $link; ?></link>
-		<guid><?php echo $guid; ?></guid>
-		<pubDate><?php echo $date; ?></pubDate>
-		<description><?php echo $desc; ?></description>
-	</item>
-
-<?php
-
-}
-
-?>
+<item><title><?php echo $title; ?></title><link><?php echo $link; ?></link><guid><?php echo $guid; ?></guid><pubDate><?php echo $date; ?></pubDate><description><?php echo $desc; ?></description></item>
+<?php } ?>
 
 </channel>
 </rss>
