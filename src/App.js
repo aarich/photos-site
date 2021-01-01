@@ -41,7 +41,7 @@ export default function App() {
 
 function loadImageNames(setImages, setHeader) {
   if (isDevMode()) {
-    new Promise(function (resolve, reject) {
+    new Promise(function (resolve) {
       setTimeout(
         () =>
           resolve(
@@ -56,7 +56,7 @@ function loadImageNames(setImages, setHeader) {
       setHeader(result[0]);
     });
   } else {
-    fetch('/images.php', { cache: 'no-cache' })
+    fetch('/images', { cache: 'no-cache' })
       .then((response) => response.json())
       .then((data) => {
         setImages(data.images);

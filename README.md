@@ -8,7 +8,7 @@ This was originally built for [photos.mrarich.com](https://photos.mrarich.com), 
 
 - Paginated gallery
 - "Reactive" image sizing
-- RSS Feed ([feed.php](https://photos.mrarich.com/feed.php))
+- RSS Feed ([feed.php](https://photos.mrarich.com/feed))
 - Caching
 - Keyboard navigation
 - Automatic EXIF data display

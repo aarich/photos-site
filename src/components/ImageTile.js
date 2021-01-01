@@ -15,10 +15,7 @@ export default function ImageTile({ image }) {
           {isDevMode() ? (
             <p>IMAGE: {image}</p>
           ) : (
-            <img
-              src={`/crop.php?img=${toName(image)}&w=600&h=400`}
-              alt={image}
-            />
+            <img src={`/crop?img=${toName(image)}&w=600&h=400`} alt={image} />
           )}
         </Link>
       </div>

@@ -141,7 +141,7 @@ function getAbout() {
 
 function getFooter() {
   const links = [
-    { h: '/feed.php', n: 'RSS' },
+    { h: '/feed', n: 'RSS' },
     { h: 'https://mrarich.com/contact', n: 'Contact' },
     { h: 'https://projects.mrarich.com', n: 'Projects' },
     { h: 'https://mrarich.com', n: 'Site Home' },

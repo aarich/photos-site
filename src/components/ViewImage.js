@@ -48,7 +48,7 @@ export default function ViewImage() {
 
   const w = window.innerWidth;
   const h = window.innerHeight;
-  const src = '/resize.php?img=' + toName(image) + '&w=' + w + '&h=' + h;
+  const src = '/resize?img=' + toName(image) + '&w=' + w + '&h=' + h;
 
   return (
     <div>

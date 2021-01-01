@@ -53,7 +53,7 @@ export default function ImageExif({ image }) {
  */
 function loadExifData(image, setExifData) {
   setExifData(null);
-  fetch(`/exif.php?img=${toName(image)}`)
+  fetch(`/exif?img=${toName(image)}`)
     .then((response) => response.text())
     .then((text) => {
       let data;
