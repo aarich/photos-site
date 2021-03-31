@@ -17,7 +17,7 @@ This was originally built for [photos.mrarich.com](https://photos.mrarich.com), 
 ## Usage
 
 - Add an `img` directory in the `public` folder.
-  - The images should match `IMG_XXXX.JPG`. The format can be updated in [`Utils.js`](src/utils/Utils.js).
+  - The images should match `IMG_XXXX.JPG`. The format can be updated in [`Utils.js`](src/utils/utils.js).
 - Update [`manifest.json`](public/manifest.json)
 - Update [links throughout](https://github.com/aarich/photos-site/search?q=mrarich)
 - Update [`.env`](/.env)
