@@ -117,7 +117,7 @@ function getHeader() {
       <div className="container">
         <div className="navbar-header">
           <a className="navbar-brand page-scroll" href="https://mrarich.com">
-            MR. ARICH
+            Alex Rich
           </a>
         </div>
       </div>
