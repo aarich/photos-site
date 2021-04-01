@@ -4,11 +4,14 @@ import React from 'react';
  * returns file name of the image number
  * @param {string} img the number of the image (e.g. 2103)
  */
-export function toName(img) {
-  return `img/IMG_${img}.JPG`;
-}
+export const toName = (img: string) => `img/IMG_${img}.JPG`;
 
-export function chooseRandom(array, avoid) {
+/**
+ * @param array array of elements
+ * @param avoid one element to NOT chose
+ * @returns a random element from the array that isn't the avoid element
+ */
+export const chooseRandom = <T>(array: T[], avoid?: T) => {
   const currentIndex = avoid ? array.indexOf(avoid) : -1;
   let index = currentIndex;
 
@@ -17,10 +20,8 @@ export function chooseRandom(array, avoid) {
   }
 
   return array[index];
-}
+};
 
-export function isDevMode() {
-  return '_self' in React.createElement('div');
-}
+export const isDevMode = () => '_self' in React.createElement('div');
 
 export const PAGE_SIZE = 12;

@@ -17,13 +17,13 @@ This was originally built for [photos.mrarich.com](https://photos.mrarich.com), 
 ## Usage
 
 - Add an `img` directory in the `public` folder.
-  - The images should match `IMG_XXXX.JPG`. The format can be updated in [`utils.js`](src/utils/utils.js).
+  - The images should match `IMG_XXXX.JPG`. The format can be updated in [`utils.ts`](src/utils/utils.ts).
 - Update [`manifest.json`](public/manifest.json)
 - Update [links throughout](https://github.com/aarich/photos-site/search?q=mrarich)
 - Update [`.env`](/.env)
 - Update logos in `public`
 - Update `favicon.ico`
-- Run `yarn build`
+- Run `npm run build`
 - Copy output build directory to apache webserver
 
 ## Scripts
@@ -31,11 +31,11 @@ This was originally built for [photos.mrarich.com](https://photos.mrarich.com), 
 Instructions selected from the `create-react-app` bootstrap.
 In the project directory, you can run:
 
-- `yarn start`: Runs the app in the development mode.
+- `npm run start`: Runs the app in the development mode.
 
-- `yarn test`: Launches the test runner in the interactive watch mode. (No tests for now)
+- `npm run test`: Launches the test runner in the interactive watch mode. (No tests for now)
 
-- `yarn build`: Builds the app for production to the `build` folder.
+- `npm run build`: Builds the app for production to the `build` folder.
 
 ## Thanks
 

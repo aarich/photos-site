@@ -1,13 +1,19 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
+type Props = {
+  newer: string;
+  older: string;
+  page: number;
+};
+
 /**
  * Navigation header
- * @param {Object} props properties
+ * @param props properties
  * - {newer, older} ids of neighboring photos
  * - page the page this image is on
  */
-export default function Header({ newer, older, page }) {
+export default ({ newer, older, page }: Props) => {
   const className = older && newer ? '' : 'disabled-link';
 
   return (
@@ -25,4 +31,4 @@ export default function Header({ newer, older, page }) {
       </Link>
     </div>
   );
-}
+};

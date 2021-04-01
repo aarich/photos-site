@@ -1,19 +1,38 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
-import { ImageContext } from '../ImageContext';
+import ImageContext from '../ImageContext';
 import history from '../utils/history';
 import { PAGE_SIZE, toName } from '../utils/utils';
 import Footer from './Footer';
 import Header from './Header';
 import ImageExif from './ImageExif';
 
+const setLinks = (
+  setNewer: (newer: string) => void,
+  setOlder: (older: string) => void,
+  setPage: (page: number) => void,
+  image: string,
+  images: string[]
+) => {
+  const currentIndex = images.indexOf(image);
+
+  const newer = currentIndex - 1;
+  const older = currentIndex + 1;
+
+  setNewer(images[newer < 0 ? images.length - 1 : newer]);
+  setOlder(images[older >= images.length ? 0 : older]);
+
+  // Figure out what page this image is on
+  setPage(Math.floor(currentIndex / PAGE_SIZE) + 1);
+};
+
 /**
  * View a single image and its data
  */
-export default function ViewImage() {
+const ViewImage = () => {
   const images = useContext(ImageContext);
-  let { image } = useParams();
+  const { image } = useParams<{ image: string }>();
   const [newer, setNewer] = useState('');
   const [older, setOlder] = useState('');
   const [page, setPage] = useState(0);
@@ -31,7 +50,7 @@ export default function ViewImage() {
   }, [image, images]);
 
   useEffect(() => {
-    const handler = (e) => {
+    const handler = (e: KeyboardEvent) => {
       if (e.key === 'Escape') {
         history.push(`/?p=${page}`);
       } else if (e.key === 'ArrowLeft') {
@@ -48,7 +67,7 @@ export default function ViewImage() {
 
   const w = window.innerWidth;
   const h = window.innerHeight;
-  const src = '/resize?img=' + toName(image) + '&w=' + w + '&h=' + h;
+  const src = `/resize?img=${toName(image)}&w=${w}&h=${h}`;
 
   return (
     <div>
@@ -60,17 +79,6 @@ export default function ViewImage() {
       <Footer />
     </div>
   );
-}
+};
 
-function setLinks(setNewer, setOlder, setPage, image, images) {
-  const currentIndex = images.indexOf(image);
-
-  const newer = currentIndex - 1;
-  const older = currentIndex + 1;
-
-  setNewer(images[newer < 0 ? images.length - 1 : newer]);
-  setOlder(images[older >= images.length ? 0 : older]);
-
-  // Figure out what page this image is on
-  setPage(Math.floor(currentIndex / PAGE_SIZE) + 1);
-}
+export default ViewImage;
