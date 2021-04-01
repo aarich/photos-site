@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Route, Router, Switch } from 'react-router-dom';
+import { Route, Router, Switch, useLocation } from 'react-router-dom';
 
 import View from './pages/View';
 import ViewAll from './pages/ViewAll';
@@ -28,6 +28,18 @@ function loadImageNames(
   }
 }
 
+function NoMatch() {
+  const location = useLocation();
+
+  return (
+    <div>
+      <h3>
+        No match for &apos;<code>{location.pathname}</code>&apos;
+      </h3>
+    </div>
+  );
+}
+
 const App = () => {
   // Constants throughout the app
   const [images, setImages] = useState<string[]>([]);
@@ -52,6 +64,9 @@ const App = () => {
                 scrollY={scrollY}
                 setScrollY={setScrollY}
               />
+            </Route>
+            <Route path="*">
+              <NoMatch />
             </Route>
           </Switch>
         </div>
