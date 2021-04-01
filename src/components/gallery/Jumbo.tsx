@@ -8,7 +8,7 @@ type Props = {
 
 /**
  * Contains page title and a link to the #about section for quick scroll
- * @param {object} props - id of photo chosen to be background
+ * image - id of photo chosen to be background
  */
 export default ({ image }: Props) => {
   const url = `/crop?img=${toName(image)}&w=1600&h=1400`;

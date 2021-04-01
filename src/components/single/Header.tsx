@@ -9,7 +9,6 @@ type Props = {
 
 /**
  * Navigation header
- * @param props properties
  * - {newer, older} ids of neighboring photos
  * - page the page this image is on
  */

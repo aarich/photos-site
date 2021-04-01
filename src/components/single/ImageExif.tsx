@@ -69,7 +69,6 @@ function chooseRandomImage<T>(image: T, images: T[], setImage: (i: T) => void) {
 
 /**
  * Loads EXIF data as well as links to original + random
- * @param image id of image
  */
 const ImageExif: React.FunctionComponent<Props> = ({ image }) => {
   const [exifData, setExifData] = useState<ExifData>();
