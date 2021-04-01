@@ -1,10 +1,8 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
-import ImageContext from '../ImageContext';
-import history from '../utils/history';
-import { PAGE_SIZE, toName } from '../utils/utils';
-import Footer from './Footer';
+import { ImageContext, PAGE_SIZE, history, toName } from '../../utils';
+import Footer from '../shared/Footer';
 import Header from './Header';
 import ImageExif from './ImageExif';
 

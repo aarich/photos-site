@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { toName } from '../utils/utils';
+import { toName } from '../../utils';
 
 type Props = {
   image: string;

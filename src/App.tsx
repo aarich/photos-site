@@ -1,11 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { Route, Router, Switch } from 'react-router-dom';
 
-import View from './components/View';
-import ViewAll from './components/ViewAll';
-import ImageContext from './ImageContext';
-import history from './utils/history';
-import { chooseRandom, isDevMode } from './utils/utils';
+import View from './pages/View';
+import ViewAll from './pages/ViewAll';
+import { ImageContext, chooseRandom, history, isDevMode } from './utils';
 
 function loadImageNames(
   setImages: (images: string[]) => void,

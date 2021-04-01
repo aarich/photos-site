@@ -1,9 +1,13 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
-import ImageContext from '../ImageContext';
-import { ExifData, ExifSuccess } from '../utils/types';
-import { chooseRandom, toName } from '../utils/utils';
+import {
+  ExifData,
+  ExifSuccess,
+  ImageContext,
+  chooseRandom,
+  toName,
+} from '../../utils';
 
 type Props = {
   image: string;

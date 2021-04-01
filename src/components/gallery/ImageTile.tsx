@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-import { isDevMode, toName } from '../utils/utils';
+import { isDevMode, toName } from '../../utils';
 
 type Props = {
   image: string;

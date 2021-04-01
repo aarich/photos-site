@@ -1,12 +1,10 @@
 import React, { useContext, useEffect, useRef, useState } from 'react';
 
-import ImageContext from '../ImageContext';
-import history from '../utils/history';
-import { PAGE_SIZE } from '../utils/utils';
-import Footer from './Footer';
-import ImageTiles from './ImageTiles';
-import Jumbo from './Jumbo';
-import Pager from './Pager';
+import ImageTiles from '../components/gallery/ImageTiles';
+import Jumbo from '../components/gallery/Jumbo';
+import Pager from '../components/gallery/Pager';
+import Footer from '../components/shared/Footer';
+import { ImageContext, PAGE_SIZE, history } from '../utils';
 
 /**
  * @returns user friendly page number (exact url param)

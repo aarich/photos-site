@@ -1,7 +1,7 @@
 import React from 'react';
 import { Route, Switch, useHistory, useRouteMatch } from 'react-router-dom';
 
-import ViewImage from './ViewImage';
+import ViewImage from '../components/single/ViewImage';
 
 const ReturnHome = () => {
   const history = useHistory();
