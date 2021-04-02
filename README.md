@@ -25,8 +25,8 @@ This was built for [photos.mrarich.com](https://photos.mrarich.com) but the sour
 - Update [`manifest.json`](public/manifest.json)
 - Update [links throughout](https://github.com/aarich/photos-site/search?q=mrarich)
 - Update [`.env`](/.env)
-- Update logos in [`public`](src/public)
-- Update [`favicon.ico`](src/public/favicon.ico)
+- Update logos in [`public`](public)
+- Update [`favicon.ico`](public/favicon.ico)
 - Update [`info.ts`](src/utils/info.ts) with your own tags
 - Run `npm run start` to test
 - Run `npm run build` to build
