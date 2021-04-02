@@ -1,6 +1,15 @@
-import React, { useContext, useEffect, useRef, useState } from 'react';
+import React, {
+  useCallback,
+  useContext,
+  useEffect,
+  useReducer,
+  useRef,
+  useState,
+} from 'react';
 
 import About from '../components/gallery/About';
+import Filter from '../components/gallery/filter/Filter';
+import FilterList from '../components/gallery/filter/FilterList';
 import Footer from '../components/gallery/Footer';
 import Header from '../components/gallery/Header';
 import ImageTiles from '../components/gallery/ImageTiles';
@@ -9,10 +18,12 @@ import Pager from '../components/gallery/Pager';
 import {
   ImageContext,
   PAGE_SIZE,
+  Tag,
   getPageParam,
   history,
   setURLParams,
 } from '../utils';
+import { filterImagesByTags } from '../utils/filters';
 
 type Props = {
   headerImage: string;
@@ -20,6 +31,8 @@ type Props = {
   setScrollY: (sy: number) => void;
 };
 
+const calcTotalPages = (images: string[]) =>
+  Math.ceil(images.length / PAGE_SIZE);
 /**
  * The gallery view of all the images
  * - headerImage: the chosen image to display as hero
@@ -27,20 +40,28 @@ type Props = {
 const ViewAll = ({ headerImage, scrollY, setScrollY }: Props) => {
   const images = useContext(ImageContext);
   const [page, setPage] = useState(() => getPageParam() - 1);
+  const [selectedTags, setSelectedTags] = useState<Tag[]>([]);
   const [displayedImages, setDisplayedImages] = useState<string[]>([]);
+  const [totalPages, setTotalPages] = useState(calcTotalPages(images));
+  const [and, toggleAnd] = useReducer((a) => !a, false);
 
   useEffect(() => {
-    if (images.length > 0 && page > Math.ceil(images.length / PAGE_SIZE)) {
+    const filteredImages = filterImagesByTags(images, selectedTags, and);
+    if (
+      filteredImages.length > 0 &&
+      page > Math.ceil(filteredImages.length / PAGE_SIZE)
+    ) {
       setPage(0);
     }
 
     const offset = PAGE_SIZE * page;
-    const start = Math.min(offset, images.length);
-    const end = Math.min(offset + PAGE_SIZE, images.length + 1);
-    setDisplayedImages(images.slice(start, end));
-  }, [page, images]);
+    const start = Math.min(offset, filteredImages.length);
+    const end = Math.min(offset + PAGE_SIZE, filteredImages.length + 1);
 
-  const totalPages = Math.ceil(images.length / PAGE_SIZE);
+    setDisplayedImages(filteredImages.slice(start, end));
+    setTotalPages(calcTotalPages(filteredImages));
+  }, [page, images, selectedTags, and]);
+
   const tilesRef = useRef<HTMLBRElement>(null);
 
   const setPageAndScroll = (newPage: number) => {
@@ -71,22 +92,53 @@ const ViewAll = ({ headerImage, scrollY, setScrollY }: Props) => {
 
   useEffect(() => history.listen(() => setPage(getPageParam() - 1)), []);
 
+  const toggleTag = useCallback(
+    (tag: Tag) => {
+      if (selectedTags.includes(tag)) {
+        setSelectedTags(selectedTags.filter((t) => t !== tag));
+      } else {
+        setSelectedTags([...selectedTags, tag]);
+      }
+    },
+    [selectedTags]
+  );
+
   return (
     <>
       <Header />
       <Jumbo image={headerImage} />
       <About />
-      {displayedImages.length === 0 ? (
-        <div style={{ minHeight: 400 * 2 }} />
-      ) : (
-        <>
-          <Pager current={page} total={totalPages} setPage={setPageAndScroll} />
-          <br ref={tilesRef} />
-          <ImageTiles images={displayedImages} />
-          <br />
-          <Pager current={page} total={totalPages} setPage={setPageAndScroll} />
-        </>
+
+      <div className="row justify-content-center">
+        <Pager current={page} total={totalPages} setPage={setPageAndScroll} />
+        <Filter
+          selectedTags={selectedTags}
+          onToggleTag={toggleTag}
+          and={and}
+          toggleAnd={toggleAnd}
+        />
+      </div>
+      {selectedTags.length > 0 && (
+        <div className="row justify-content-center">
+          <FilterList selectedTags={selectedTags} onPressTag={toggleTag} />
+        </div>
       )}
+
+      <br ref={tilesRef} />
+      {displayedImages.length === 0 ? (
+        <div
+          style={{ minHeight: 400 * 2 }}
+          className="d-flex justify-content-center"
+        >
+          <h2>No Images Here!</h2>
+        </div>
+      ) : (
+        <ImageTiles images={displayedImages} />
+      )}
+      <br />
+      <div className="row justify-content-center">
+        <Pager current={page} total={totalPages} setPage={setPageAndScroll} />
+      </div>
       <Footer />
     </>
   );

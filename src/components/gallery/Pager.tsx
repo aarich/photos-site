@@ -1,4 +1,5 @@
 import React from 'react';
+import { Button, ButtonGroup } from 'react-bootstrap';
 
 type Props = {
   setPage: (page: number) => void;
@@ -12,25 +13,23 @@ type Props = {
  *  - current: the current page number (zero-based)
  *  - total: number of pages.
  */
-export default ({ setPage, current, total }: Props) => {
-  const selected = 'btn-secondary';
-  const unselected = 'btn-outline-secondary';
-  return (
-    <div className="d-flex justify-content-center">
-      <div className="btn-group" role="group" aria-label="Basic example">
+export default ({ setPage, current, total }: Props) =>
+  total > 0 ? (
+    <span className="mx-3">
+      <ButtonGroup>
         {Array(total)
           .fill(0)
           .map((_, i) => (
-            <button
-              type="button"
-              className={`btn ${current === i ? selected : unselected}`}
+            <Button
+              variant={current === i ? 'secondary' : 'outline-secondary'}
               key={i}
               onClick={() => setPage(i)}
             >
               {i + 1}
-            </button>
+            </Button>
           ))}
-      </div>
-    </div>
+      </ButtonGroup>
+    </span>
+  ) : (
+    <></>
   );
-};

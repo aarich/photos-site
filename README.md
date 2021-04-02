@@ -2,7 +2,7 @@
 
 # Simple Photo Gallery in React + Apache Http Server
 
-This was originally built for [photos.mrarich.com](https://photos.mrarich.com), but it's probably reusable? At least as a starting point?
+This was built for [photos.mrarich.com](https://photos.mrarich.com), but it's probably reusable? At least as a starting point?
 
 ## Features
 
@@ -11,6 +11,7 @@ This was originally built for [photos.mrarich.com](https://photos.mrarich.com), 
 - RSS Feed ([feed.php](https://photos.mrarich.com/feed))
 - Caching
 - Keyboard navigation
+- Filter by tags using AND/OR
 - Automatic EXIF data display
 - Probably some bugs
 
@@ -23,12 +24,12 @@ This was originally built for [photos.mrarich.com](https://photos.mrarich.com), 
 - Update [`.env`](/.env)
 - Update logos in `public`
 - Update `favicon.ico`
+- Update [`info.ts`](src/utils/info.ts) with your own tags
 - Run `npm run build`
 - Copy output build directory to apache webserver
 
 ## Scripts
 
-Instructions selected from the `create-react-app` bootstrap.
 In the project directory, you can run:
 
 - `npm run start`: Runs the app in the development mode.
@@ -40,3 +41,5 @@ In the project directory, you can run:
 ## Thanks
 
 - [Create React App](https://github.com/facebook/create-react-app)
+- [Bootstrap](https://getbootstrap.com/)
+- [React Bootstrap](https://react-bootstrap.github.io)
