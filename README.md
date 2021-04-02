@@ -2,16 +2,17 @@
 
 # Simple Photo Gallery in React + Apache Http Server
 
-This was built for [photos.mrarich.com](https://photos.mrarich.com), but it's probably reusable? At least as a starting point?
+This was built for [photos.mrarich.com](https://photos.mrarich.com) but the source is probably reusable, at least as a starting point.
 
 ## Features
 
 - Paginated gallery
-- "Reactive" image sizing
+- "Reactive" image sizing to save bandwidth on mobile
 - RSS Feed ([feed.php](https://photos.mrarich.com/feed))
 - Caching
 - Keyboard navigation
-- Filter by tags using AND/OR
+- Tag filtering
+- URL navigation
 - Automatic EXIF data display
 - Probably some bugs
 
@@ -19,14 +20,17 @@ This was built for [photos.mrarich.com](https://photos.mrarich.com), but it's pr
 
 - Add an `img` directory in the `public` folder.
   - The images should match `IMG_XXXX.JPG`. The format can be updated in [`utils.ts`](src/utils/utils.ts).
+  - You can experiment with file sizes but since everything is re-processed to the computer file size for bandwidth saving you don't need to host large image files.
+  - To save time/space/energy, you can also just put the `img` directory in your webserver root and make sure to not overwrite it when copying output files.
 - Update [`manifest.json`](public/manifest.json)
 - Update [links throughout](https://github.com/aarich/photos-site/search?q=mrarich)
 - Update [`.env`](/.env)
-- Update logos in `public`
-- Update `favicon.ico`
+- Update logos in [`public`](src/public)
+- Update [`favicon.ico`](src/public/favicon.ico)
 - Update [`info.ts`](src/utils/info.ts) with your own tags
-- Run `npm run build`
-- Copy output build directory to apache webserver
+- Run `npm run start` to test
+- Run `npm run build` to build
+  - Copy output build directory to your apache webserver
 
 ## Scripts
 

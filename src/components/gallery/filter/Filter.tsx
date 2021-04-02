@@ -14,25 +14,38 @@ export default ({ selectedTags, onToggleTag, and, toggleAnd }: Props) => {
   const tagOptions = Object.values(Tag);
 
   return (
-    <ButtonGroup>
-      <DropdownButton title="Filter" as={ButtonGroup} variant="secondary">
-        {tagOptions.sort().map((tag) => (
-          <Dropdown.Item
-            as={Button}
-            key={tag}
-            variant="light"
-            onClick={() => onToggleTag(tag)}
-            active={selectedTags.includes(tag)}
-          >
-            {tag}
-          </Dropdown.Item>
-        ))}
-      </DropdownButton>
+    <>
+      <ButtonGroup className="mx-3">
+        <DropdownButton title="Filter" as={ButtonGroup} variant="secondary">
+          {tagOptions.sort().map((tag) => (
+            <Dropdown.Item
+              as={Button}
+              key={tag}
+              variant="light"
+              onClick={() => onToggleTag(tag)}
+              active={selectedTags.includes(tag)}
+            >
+              {tag}
+            </Dropdown.Item>
+          ))}
+        </DropdownButton>
+      </ButtonGroup>
       {selectedTags.length > 1 && (
-        <Button variant="outline-secondary" onClick={toggleAnd}>
-          {and ? 'AND' : 'OR'}
-        </Button>
+        <ButtonGroup>
+          <Button
+            variant={and ? 'secondary' : 'outline-secondary'}
+            onClick={() => !and && toggleAnd()}
+          >
+            AND
+          </Button>
+          <Button
+            variant={and ? 'outline-secondary' : 'secondary'}
+            onClick={() => and && toggleAnd()}
+          >
+            OR
+          </Button>
+        </ButtonGroup>
       )}
-    </ButtonGroup>
+    </>
   );
 };

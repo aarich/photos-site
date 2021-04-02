@@ -14,7 +14,6 @@ RewriteRule !.*\.php$ %{REQUEST_FILENAME}.php [QSA,L]
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteRule ^ index.html [QSA,L]
 
-
 # One month for most static assets
 <filesMatch ".(css|js)$">
 Header set Cache-Control "max-age=2628000, public"

@@ -6,6 +6,7 @@ import React, {
   useRef,
   useState,
 } from 'react';
+import { ButtonToolbar } from 'react-bootstrap';
 
 import About from '../components/gallery/About';
 import Filter from '../components/gallery/filter/Filter';
@@ -46,20 +47,24 @@ const ViewAll = ({ headerImage, scrollY, setScrollY }: Props) => {
   const [and, toggleAnd] = useReducer((a) => !a, false);
 
   useEffect(() => {
-    const filteredImages = filterImagesByTags(images, selectedTags, and);
-    if (
-      filteredImages.length > 0 &&
-      page > Math.ceil(filteredImages.length / PAGE_SIZE)
-    ) {
-      setPage(0);
+    if (images.length === 0) {
+      // Hold off on this until images have loaded
+      return;
     }
+    const filteredImages = filterImagesByTags(images, selectedTags, and);
+    const calculatedTotalPages = calcTotalPages(filteredImages);
+    const clampedPage = Math.max(Math.min(page, calculatedTotalPages - 1), 0);
 
-    const offset = PAGE_SIZE * page;
+    const offset = PAGE_SIZE * clampedPage;
     const start = Math.min(offset, filteredImages.length);
     const end = Math.min(offset + PAGE_SIZE, filteredImages.length + 1);
 
     setDisplayedImages(filteredImages.slice(start, end));
-    setTotalPages(calcTotalPages(filteredImages));
+    setTotalPages(calculatedTotalPages);
+    setPage(clampedPage);
+    if (clampedPage !== page) {
+      setURLParams(clampedPage);
+    }
   }, [page, images, selectedTags, and]);
 
   const tilesRef = useRef<HTMLBRElement>(null);
@@ -110,13 +115,15 @@ const ViewAll = ({ headerImage, scrollY, setScrollY }: Props) => {
       <About />
 
       <div className="row justify-content-center">
-        <Pager current={page} total={totalPages} setPage={setPageAndScroll} />
-        <Filter
-          selectedTags={selectedTags}
-          onToggleTag={toggleTag}
-          and={and}
-          toggleAnd={toggleAnd}
-        />
+        <ButtonToolbar>
+          <Pager current={page} total={totalPages} setPage={setPageAndScroll} />
+          <Filter
+            selectedTags={selectedTags}
+            onToggleTag={toggleTag}
+            and={and}
+            toggleAnd={toggleAnd}
+          />
+        </ButtonToolbar>
       </div>
       {selectedTags.length > 0 && (
         <div className="row justify-content-center">

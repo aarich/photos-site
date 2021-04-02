@@ -15,21 +15,19 @@ type Props = {
  */
 export default ({ setPage, current, total }: Props) =>
   total > 0 ? (
-    <span className="mx-3">
-      <ButtonGroup>
-        {Array(total)
-          .fill(0)
-          .map((_, i) => (
-            <Button
-              variant={current === i ? 'secondary' : 'outline-secondary'}
-              key={i}
-              onClick={() => setPage(i)}
-            >
-              {i + 1}
-            </Button>
-          ))}
-      </ButtonGroup>
-    </span>
+    <ButtonGroup>
+      {Array(total)
+        .fill(0)
+        .map((_, i) => (
+          <Button
+            variant={current === i ? 'secondary' : 'outline-secondary'}
+            key={i}
+            onClick={() => setPage(i)}
+          >
+            {i + 1}
+          </Button>
+        ))}
+    </ButtonGroup>
   ) : (
     <></>
   );
