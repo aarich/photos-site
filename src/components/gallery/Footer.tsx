@@ -13,7 +13,7 @@ const links = [
 export default () => (
   <>
     <section>
-      <div className="container content-section intro">
+      <div className="container content-section intro px-5">
         <h2>Cool?</h2>
         <p>
           If you like any of the photos here, I&apos;d love to hear about it!

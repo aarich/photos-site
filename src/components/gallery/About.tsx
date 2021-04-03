@@ -2,7 +2,7 @@ import React from 'react';
 
 export default () => (
   <section id="about">
-    <div className="container content-section text-center intro">
+    <div className="container content-section text-center intro px-4">
       <h2>I went outside once</h2>
       <p>
         I enjoy hiking and stuff and then one time I bought an old DSLR camera

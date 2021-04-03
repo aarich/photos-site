@@ -1,11 +1,4 @@
-import React, {
-  useCallback,
-  useContext,
-  useEffect,
-  useReducer,
-  useRef,
-  useState,
-} from 'react';
+import React, { useContext, useEffect, useRef, useState } from 'react';
 import { ButtonToolbar } from 'react-bootstrap';
 
 import About from '../components/gallery/About';
@@ -20,16 +13,20 @@ import {
   ImageContext,
   PAGE_SIZE,
   Tag,
+  TagAggregateMode,
   getPageParam,
   history,
   setURLParams,
 } from '../utils';
-import { filterImagesByTags } from '../utils/filters';
+import { filterImagesByTags, toggleTag } from '../utils/filters';
 
 type Props = {
   headerImage: string;
   scrollY: number;
   setScrollY: (sy: number) => void;
+  setFilteredImages: (images: string[]) => void;
+  setSelectedTags: (tags: Tag[]) => void;
+  setTagMode: (mode: TagAggregateMode) => void;
 };
 
 const calcTotalPages = (images: string[]) =>
@@ -38,20 +35,26 @@ const calcTotalPages = (images: string[]) =>
  * The gallery view of all the images
  * - headerImage: the chosen image to display as hero
  */
-const ViewAll = ({ headerImage, scrollY, setScrollY }: Props) => {
-  const images = useContext(ImageContext);
+const ViewAll = ({
+  headerImage,
+  scrollY,
+  setScrollY,
+  setFilteredImages,
+  setSelectedTags,
+  setTagMode,
+}: Props) => {
+  const { allImages, filteredImages, selectedTags, tagMode } = useContext(
+    ImageContext
+  );
   const [page, setPage] = useState(() => getPageParam() - 1);
-  const [selectedTags, setSelectedTags] = useState<Tag[]>([]);
   const [displayedImages, setDisplayedImages] = useState<string[]>([]);
-  const [totalPages, setTotalPages] = useState(calcTotalPages(images));
-  const [and, toggleAnd] = useReducer((a) => !a, false);
+  const [totalPages, setTotalPages] = useState(calcTotalPages(allImages));
 
   useEffect(() => {
-    if (images.length === 0) {
+    if (allImages.length === 0) {
       // Hold off on this until images have loaded
       return;
     }
-    const filteredImages = filterImagesByTags(images, selectedTags, and);
     const calculatedTotalPages = calcTotalPages(filteredImages);
     const clampedPage = Math.max(Math.min(page, calculatedTotalPages - 1), 0);
 
@@ -65,7 +68,11 @@ const ViewAll = ({ headerImage, scrollY, setScrollY }: Props) => {
     if (clampedPage !== page) {
       setURLParams(clampedPage);
     }
-  }, [page, images, selectedTags, and]);
+  }, [allImages.length, filteredImages, page]);
+
+  useEffect(() => {
+    setFilteredImages(filterImagesByTags(allImages, selectedTags, tagMode));
+  }, [allImages, selectedTags, setFilteredImages, tagMode]);
 
   const tilesRef = useRef<HTMLBRElement>(null);
 
@@ -97,41 +104,30 @@ const ViewAll = ({ headerImage, scrollY, setScrollY }: Props) => {
 
   useEffect(() => history.listen(() => setPage(getPageParam() - 1)), []);
 
-  const toggleTag = useCallback(
-    (tag: Tag) => {
-      if (selectedTags.includes(tag)) {
-        setSelectedTags(selectedTags.filter((t) => t !== tag));
-      } else {
-        setSelectedTags([...selectedTags, tag]);
-      }
-    },
-    [selectedTags]
-  );
-
   return (
     <>
       <Header />
       <Jumbo image={headerImage} />
       <About />
 
-      <div className="row justify-content-center">
-        <ButtonToolbar>
+      <div className="d-flex justify-content-center">
+        <ButtonToolbar className="d-flex justify-content-center">
           <Pager current={page} total={totalPages} setPage={setPageAndScroll} />
-          <Filter
-            selectedTags={selectedTags}
-            onToggleTag={toggleTag}
-            and={and}
-            toggleAnd={toggleAnd}
-          />
+          <Filter setSelectedTags={setSelectedTags} setTagMode={setTagMode} />
         </ButtonToolbar>
       </div>
+
       {selectedTags.length > 0 && (
-        <div className="row justify-content-center">
-          <FilterList selectedTags={selectedTags} onPressTag={toggleTag} />
+        <div className="d-flex justify-content-center">
+          <FilterList
+            selectedTags={selectedTags}
+            onPressTag={(tag) => toggleTag(tag, selectedTags, setSelectedTags)}
+          />
         </div>
       )}
 
       <br ref={tilesRef} />
+
       {displayedImages.length === 0 ? (
         <div
           style={{ minHeight: 400 * 2 }}
@@ -142,10 +138,13 @@ const ViewAll = ({ headerImage, scrollY, setScrollY }: Props) => {
       ) : (
         <ImageTiles images={displayedImages} />
       )}
+
       <br />
-      <div className="row justify-content-center">
+
+      <div className="d-flex justify-content-center">
         <Pager current={page} total={totalPages} setPage={setPageAndScroll} />
       </div>
+
       <Footer />
     </>
   );

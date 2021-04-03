@@ -1,5 +1,5 @@
 import _info from './info';
-import { Tag } from './types';
+import { Tag, TagAggregateMode } from './types';
 import { isDevMode } from './utils';
 
 const tagToImageMap: Partial<Record<Tag, string[]>> = {};
@@ -37,7 +37,7 @@ const imageHasAllTags = (image: string, tags: Tag[]) =>
 export const filterImagesByTags = (
   allImages: string[],
   selectedTags: Tag[],
-  and: boolean
+  tagMode: TagAggregateMode
 ) => {
   if (selectedTags.length === 0) {
     return allImages;
@@ -49,11 +49,21 @@ export const filterImagesByTags = (
     tagToImages[tag]?.forEach((image) => or.add(image))
   );
 
-  const predicate = and
-    ? (im: string) => imageHasAllTags(im, selectedTags)
-    : () => true;
+  const predicate =
+    tagMode === TagAggregateMode.And
+      ? (im: string) => imageHasAllTags(im, selectedTags)
+      : () => true;
 
   return Array.from(or)
     .filter(predicate)
     .sort((a, b) => Number.parseInt(b) - Number.parseInt(a));
 };
+
+export const toggleTag = (
+  tag: Tag,
+  selectedTags: Tag[],
+  setSelectedTags: (tags: Tag[]) => void
+) =>
+  selectedTags.includes(tag)
+    ? setSelectedTags(selectedTags.filter((t) => t !== tag))
+    : setSelectedTags([...selectedTags, tag]);

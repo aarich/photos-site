@@ -10,6 +10,11 @@ export type ExifSuccess = {
   focal: string;
 };
 
+export enum TagAggregateMode {
+  And = 'AND',
+  Or = 'OR',
+}
+
 export enum Tag {
   Sunset = 'Sunset',
   Sunrise = 'Sunrise',

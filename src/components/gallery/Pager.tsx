@@ -15,7 +15,7 @@ type Props = {
  */
 export default ({ setPage, current, total }: Props) =>
   total > 0 ? (
-    <ButtonGroup>
+    <ButtonGroup className="mx-1">
       {Array(total)
         .fill(0)
         .map((_, i) => (

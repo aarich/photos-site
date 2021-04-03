@@ -3,30 +3,31 @@ import { Route, Router, Switch, useLocation } from 'react-router-dom';
 
 import View from './pages/View';
 import ViewAll from './pages/ViewAll';
-import { ImageContext, chooseRandom, history, isDevMode } from './utils';
+import {
+  ImageContext,
+  Tag,
+  TagAggregateMode,
+  chooseRandom,
+  history,
+  isDevMode,
+} from './utils';
 
-function loadImageNames(
-  setImages: (images: string[]) => void,
-  setHeader: (h: string) => void
-) {
-  if (isDevMode()) {
-    Promise.resolve(
-      Array(30)
-        .fill(0)
-        .map((_, i) => `${i}`)
-    ).then((result) => {
-      setImages(result);
-      setHeader(result[0]);
-    });
-  } else {
-    fetch('/images', { cache: 'no-cache' })
-      .then((response) => response.json())
-      .then((data) => {
-        setImages(data.images);
-        setHeader(chooseRandom(data.images));
-      });
-  }
-}
+const loadImageNames = (setHeader: (h: string) => void) =>
+  isDevMode()
+    ? Promise.resolve(
+        Array(30)
+          .fill(0)
+          .map((_, i) => `${i}`)
+      ).then((result) => {
+        setHeader(result[0]);
+        return result;
+      })
+    : fetch('/images', { cache: 'no-cache' })
+        .then((response) => response.json())
+        .then((data) => {
+          setHeader(chooseRandom(data.images));
+          return data.images;
+        });
 
 function NoMatch() {
   const location = useLocation();
@@ -42,16 +43,25 @@ function NoMatch() {
 
 const App = () => {
   // Constants throughout the app
-  const [images, setImages] = useState<string[]>([]);
-  const [header, setHeader] = useState('');
+  const [allImages, setImages] = useState<string[]>([]);
+  const [filteredImages, setFilteredImages] = useState<string[]>([]);
+  const [selectedTags, setSelectedTags] = useState<Tag[]>([]);
+  const [tagMode, setTagMode] = useState(TagAggregateMode.Or);
+
+  const [headerImage, setHeaderImage] = useState('');
   const [scrollY, setScrollY] = useState(0);
 
   useEffect(() => {
-    loadImageNames(setImages, setHeader);
+    loadImageNames(setHeaderImage).then((images) => {
+      setImages(images);
+      setFilteredImages(images);
+    });
   }, []);
 
   return (
-    <ImageContext.Provider value={images}>
+    <ImageContext.Provider
+      value={{ allImages, filteredImages, selectedTags, tagMode }}
+    >
       <Router history={history}>
         <div className="body">
           <Switch>
@@ -60,9 +70,14 @@ const App = () => {
             </Route>
             <Route path="/">
               <ViewAll
-                headerImage={header}
-                scrollY={scrollY}
-                setScrollY={setScrollY}
+                {...{
+                  headerImage,
+                  scrollY,
+                  setScrollY,
+                  setFilteredImages,
+                  setTagMode,
+                  setSelectedTags,
+                }}
               />
             </Route>
             <Route path="*">

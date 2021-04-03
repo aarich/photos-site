@@ -18,9 +18,10 @@ This was built for [photos.mrarich.com](https://photos.mrarich.com) but the sour
 
 ## Usage
 
+- Run `npm install` to install dependencies.
 - Add an `img` directory in the `public` folder.
   - The images should match `IMG_XXXX.JPG`. The format can be updated in [`utils.ts`](src/utils/utils.ts).
-  - You can experiment with file sizes but since everything is re-processed to the computer file size for bandwidth saving you don't need to host large image files.
+  - You can experiment with image sizes. In most places the image is resized on the server to conserve bandwidth, so whatever size is used will likely be reduced before being displayed anywhere.
   - To save time/space/energy, you can also just put the `img` directory in your webserver root and make sure to not overwrite it when copying output files.
 - Update [`manifest.json`](public/manifest.json)
 - Update [links throughout](https://github.com/aarich/photos-site/search?q=mrarich)

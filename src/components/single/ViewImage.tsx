@@ -29,23 +29,23 @@ const setLinks = (
  * View a single image and its data
  */
 const ViewImage = () => {
-  const images = useContext(ImageContext);
+  const { filteredImages } = useContext(ImageContext);
   const { image } = useParams<{ image: string }>();
   const [newer, setNewer] = useState('');
   const [older, setOlder] = useState('');
   const [page, setPage] = useState(0);
 
   useEffect(() => {
-    if (images.length === 0) {
+    if (filteredImages.length === 0) {
       return;
     }
 
-    if (!images.includes(image)) {
+    if (!filteredImages.includes(image)) {
       history.push('/');
     }
 
-    setLinks(setNewer, setOlder, setPage, image, images);
-  }, [image, images]);
+    setLinks(setNewer, setOlder, setPage, image, filteredImages);
+  }, [image, filteredImages]);
 
   useEffect(() => {
     const handler = (e: KeyboardEvent) => {
