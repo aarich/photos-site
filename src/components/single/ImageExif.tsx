@@ -91,7 +91,7 @@ const ImageExif = ({ image }: Props) => {
         <ul className="list-inline intro">
           <li className="list-inline-item">
             <a
-              href={`'/${toName(image)}`}
+              href={`/${toName(image)}`}
               className="btn btn-lg"
               target="_blank"
               rel="noreferrer"
