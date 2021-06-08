@@ -1,4 +1,10 @@
-import React, { useContext, useEffect, useRef, useState } from 'react';
+import React, {
+  useContext,
+  useEffect,
+  useReducer,
+  useRef,
+  useState,
+} from 'react';
 import { ButtonToolbar } from 'react-bootstrap';
 
 import About from '../components/gallery/About';
@@ -49,9 +55,13 @@ const ViewAll = ({
   const [page, setPage] = useState(() => getPageParam() - 1);
   const [displayedImages, setDisplayedImages] = useState<string[]>([]);
   const [totalPages, setTotalPages] = useState(calcTotalPages(allImages));
+  const [
+    filteredImagesHaveBeenSet,
+    notifyFilteredImagesHaveBeenSet,
+  ] = useReducer(() => true, false);
 
   useEffect(() => {
-    if (allImages.length === 0) {
+    if (allImages.length === 0 || !filteredImagesHaveBeenSet) {
       // Hold off on this until images have loaded
       return;
     }
@@ -68,10 +78,13 @@ const ViewAll = ({
     if (clampedPage !== page) {
       setURLParams(clampedPage);
     }
-  }, [allImages.length, filteredImages, page]);
+  }, [allImages.length, filteredImages, page, filteredImagesHaveBeenSet]);
 
   useEffect(() => {
-    setFilteredImages(filterImagesByTags(allImages, selectedTags, tagMode));
+    if (allImages.length > 0) {
+      setFilteredImages(filterImagesByTags(allImages, selectedTags, tagMode));
+      notifyFilteredImagesHaveBeenSet();
+    }
   }, [allImages, selectedTags, setFilteredImages, tagMode]);
 
   const tilesRef = useRef<HTMLBRElement>(null);
