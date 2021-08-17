@@ -157,6 +157,11 @@ const info: ImageInfo = {
   '9180': { tags: [mountain, waterfall] },
   '9205': { tags: [mountain, snow] },
   '9293': { tags: [flowers, macro] },
+  '9316': { tags: [waterfall, natPark, yosemite, perspective] },
+  '9339': { tags: [mountain, natPark, yosemite, perspective] },
+  '9581': { tags: [mountain, natPark] },
+  '9754': { tags: [mountain, natPark] },
+  '10045': { tags: [mountain, flowers] },
 };
 
 export default info;

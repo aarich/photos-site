@@ -1,6 +1,8 @@
 <?php
 session_start();
 
+include('utils.php');
+
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
@@ -25,11 +27,6 @@ date_default_timezone_set("America/Los_Angeles");
 $img_dir = "img";
 $imgs = array_filter(glob($img_dir.'/*.*'), 'is_file');
 $imgs = array_reverse($imgs);
-
-function cleanName($name) {
-    $start = strlen('img/IMG_');
-    return substr($name, $start, 4);
-}
 
 foreach($imgs as $img) {
 	$exif = @exif_read_data($img, 0, true);

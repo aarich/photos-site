@@ -10,21 +10,21 @@
   "dependencies": {
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^12.0.0",
-    "@types/jest": "^26.0.24",
-    "@types/node": "^15.12.2",
-    "@types/react": "^17.0.9",
-    "@types/react-dom": "^17.0.6",
-    "bootstrap": "^5.0.2",
+    "@types/jest": "^27.0.1",
+    "@types/node": "^16.6.1",
+    "@types/react": "^17.0.18",
+    "@types/react-dom": "^17.0.9",
+    "bootstrap": "^5.1.0",
     "history": "^4.10.1",
     "install": "^0.13.0",
-    "npm": "^7.20.0",
+    "npm": "^7.20.6",
     "react": "^17.0.2",
     "react-bootstrap": "^1.6.1",
     "react-dom": "^17.0.2",
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.3",
     "typescript": "^4.3.5",
-    "web-vitals": "^2.0.1"
+    "web-vitals": "^2.1.0"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -92,9 +92,9 @@
     ]
   },
   "devDependencies": {
-    "@types/react-router-dom": "^5.1.7",
-    "@typescript-eslint/eslint-plugin": "^4.28.4",
-    "@typescript-eslint/parser": "^4.28.1",
+    "@types/react-router-dom": "^5.1.8",
+    "@typescript-eslint/eslint-plugin": "^4.29.2",
+    "@typescript-eslint/parser": "^4.29.2",
     "eslint-config-airbnb-typescript": "^12.3.1",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-jest": "^24.4.0",
