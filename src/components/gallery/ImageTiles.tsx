@@ -1,5 +1,4 @@
 import React from 'react';
-
 import ImageTile from './ImageTile';
 
 type Props = {
@@ -10,7 +9,7 @@ type Props = {
  * A gallery of images
  * - images: a list of image ids to be displayed
  */
-export default ({ images }: Props) => (
+const ImageTiles = ({ images }: Props) => (
   <section id="portfolio">
     <div className="gallery" style={{ minHeight: 400 * 2 }}>
       <ul>
@@ -21,3 +20,5 @@ export default ({ images }: Props) => (
     </div>
   </section>
 );
+
+export default ImageTiles;

@@ -1,5 +1,4 @@
 import React from 'react';
-
 import { toName } from '../../utils';
 
 type Props = {
@@ -10,7 +9,7 @@ type Props = {
  * Contains page title and a link to the #about section for quick scroll
  * image - id of photo chosen to be background
  */
-export default ({ image }: Props) => {
+const Jumbo = ({ image }: Props) => {
   const url = `/crop?img=${toName(image)}&w=1600&h=1400`;
   const style = {
     backgroundImage: `radial-gradient(circle at 50% 50%,rgba(0,0,0,0.35),rgba(0,0,0,0.66)),url('${url}')`,
@@ -31,3 +30,5 @@ export default ({ image }: Props) => {
     </header>
   );
 };
+
+export default Jumbo;

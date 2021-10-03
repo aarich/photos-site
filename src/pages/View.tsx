@@ -1,6 +1,5 @@
 import React from 'react';
 import { Route, Switch, useHistory, useRouteMatch } from 'react-router-dom';
-
 import ViewImage from '../components/single/ViewImage';
 
 const ReturnHome = () => {
@@ -12,7 +11,7 @@ const ReturnHome = () => {
 /**
  * View to route to an image
  */
-export default () => {
+const View = () => {
   const match = useRouteMatch();
 
   return (
@@ -28,3 +27,5 @@ export default () => {
     </div>
   );
 };
+
+export default View;

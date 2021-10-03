@@ -1,6 +1,5 @@
 import React, { useContext } from 'react';
 import { Button, ButtonGroup, Dropdown, DropdownButton } from 'react-bootstrap';
-
 import { ImageContext, Tag, TagAggregateMode } from '../../../utils';
 import { toggleTag } from '../../../utils/filters';
 
@@ -9,8 +8,9 @@ type Props = {
   setTagMode: (mode: TagAggregateMode) => void;
 };
 
-export default ({ setSelectedTags, setTagMode }: Props) => {
+const Filter = ({ setSelectedTags, setTagMode }: Props) => {
   const tagOptions = Object.values(Tag);
+  tagOptions.sort();
   const tagModes = Object.values(TagAggregateMode);
 
   const { tagMode, selectedTags } = useContext(ImageContext);
@@ -19,7 +19,7 @@ export default ({ setSelectedTags, setTagMode }: Props) => {
     <>
       <ButtonGroup className="mx-1">
         <DropdownButton title="Filter" as={ButtonGroup} variant="secondary">
-          {tagOptions.sort().map((tag) => (
+          {tagOptions.map((tag) => (
             <Dropdown.Item
               as={Button}
               key={tag}
@@ -48,3 +48,5 @@ export default ({ setSelectedTags, setTagMode }: Props) => {
     </>
   );
 };
+
+export default Filter;

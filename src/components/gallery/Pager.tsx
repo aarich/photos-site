@@ -13,7 +13,7 @@ type Props = {
  *  - current: the current page number (zero-based)
  *  - total: number of pages.
  */
-export default ({ setPage, current, total }: Props) =>
+const Pager = ({ setPage, current, total }: Props) =>
   total > 0 ? (
     <ButtonGroup className="mx-1">
       {Array(total)
@@ -28,6 +28,6 @@ export default ({ setPage, current, total }: Props) =>
           </Button>
         ))}
     </ButtonGroup>
-  ) : (
-    <></>
-  );
+  ) : null;
+
+export default Pager;

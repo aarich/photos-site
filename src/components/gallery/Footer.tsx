@@ -1,6 +1,5 @@
 import React from 'react';
-
-import Footer from '../shared/Footer';
+import CRFooter from '../shared/Footer';
 
 const links = [
   { h: '/feed', n: 'RSS' },
@@ -10,7 +9,7 @@ const links = [
   { h: 'https://github.com/aarich/photos-site', n: 'Source Code' },
 ];
 
-export default () => (
+const Footer = () => (
   <>
     <section>
       <div className="container content-section intro px-5">
@@ -37,6 +36,8 @@ export default () => (
       </div>
     </section>
 
-    <Footer />
+    <CRFooter />
   </>
 );
+
+export default Footer;

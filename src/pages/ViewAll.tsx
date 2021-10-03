@@ -6,7 +6,6 @@ import React, {
   useState,
 } from 'react';
 import { ButtonToolbar } from 'react-bootstrap';
-
 import About from '../components/gallery/About';
 import Filter from '../components/gallery/filter/Filter';
 import FilterList from '../components/gallery/filter/FilterList';
@@ -16,13 +15,13 @@ import ImageTiles from '../components/gallery/ImageTiles';
 import Jumbo from '../components/gallery/Jumbo';
 import Pager from '../components/gallery/Pager';
 import {
-  ImageContext,
-  PAGE_SIZE,
-  Tag,
-  TagAggregateMode,
   getPageParam,
   history,
+  ImageContext,
+  PAGE_SIZE,
   setURLParams,
+  Tag,
+  TagAggregateMode,
 } from '../utils';
 import { filterImagesByTags, toggleTag } from '../utils/filters';
 
@@ -49,16 +48,13 @@ const ViewAll = ({
   setSelectedTags,
   setTagMode,
 }: Props) => {
-  const { allImages, filteredImages, selectedTags, tagMode } = useContext(
-    ImageContext
-  );
+  const { allImages, filteredImages, selectedTags, tagMode } =
+    useContext(ImageContext);
   const [page, setPage] = useState(() => getPageParam() - 1);
   const [displayedImages, setDisplayedImages] = useState<string[]>([]);
   const [totalPages, setTotalPages] = useState(calcTotalPages(allImages));
-  const [
-    filteredImagesHaveBeenSet,
-    notifyFilteredImagesHaveBeenSet,
-  ] = useReducer(() => true, false);
+  const [filteredImagesHaveBeenSet, notifyFilteredImagesHaveBeenSet] =
+    useReducer(() => true, false);
 
   useEffect(() => {
     if (allImages.length === 0 || !filteredImagesHaveBeenSet) {
@@ -82,7 +78,9 @@ const ViewAll = ({
 
   useEffect(() => {
     if (allImages.length > 0) {
-      setFilteredImages(filterImagesByTags(allImages, selectedTags, tagMode));
+      filterImagesByTags(allImages, selectedTags, tagMode).then(
+        setFilteredImages
+      );
       notifyFilteredImagesHaveBeenSet();
     }
   }, [allImages, selectedTags, setFilteredImages, tagMode]);

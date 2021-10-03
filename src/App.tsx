@@ -1,15 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import { Route, Router, Switch, useLocation } from 'react-router-dom';
-
 import View from './pages/View';
 import ViewAll from './pages/ViewAll';
 import {
-  ImageContext,
-  Tag,
-  TagAggregateMode,
   chooseRandom,
   history,
+  ImageContext,
   isDevMode,
+  Tag,
+  TagAggregateMode,
 } from './utils';
 
 const loadImageNames = (setHeader: (h: string) => void) =>

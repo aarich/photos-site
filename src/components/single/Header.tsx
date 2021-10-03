@@ -12,7 +12,7 @@ type Props = {
  * - {newer, older} ids of neighboring photos
  * - page the page this image is on
  */
-export default ({ newer, older, page }: Props) => {
+const Header = ({ newer, older, page }: Props) => {
   const className = older && newer ? '' : 'disabled-link';
 
   return (
@@ -31,3 +31,5 @@ export default ({ newer, older, page }: Props) => {
     </div>
   );
 };
+
+export default Header;

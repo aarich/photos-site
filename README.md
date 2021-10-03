@@ -28,7 +28,7 @@ This was built for [photos.mrarich.com](https://photos.mrarich.com) but the sour
 - Update [`.env`](/.env)
 - Update logos in [`public`](public)
 - Update [`favicon.ico`](public/favicon.ico)
-- Update [`info.ts`](src/utils/info.ts) with your own tags
+- Update [`tags.json`](public/tags.json) with your own tags
 - Run `npm run start` to test
 - Run `npm run build` to build
   - Copy output build directory to your apache webserver
@@ -38,9 +38,7 @@ This was built for [photos.mrarich.com](https://photos.mrarich.com) but the sour
 In the project directory, you can run:
 
 - `npm run start`: Runs the app in the development mode.
-
 - `npm run test`: Launches the test runner in the interactive watch mode. (No tests for now)
-
 - `npm run build`: Builds the app for production to the `build` folder.
 
 ## Thanks

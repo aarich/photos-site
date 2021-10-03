@@ -1,6 +1,5 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-
 import { isDevMode, toName } from '../../utils';
 
 type Props = {
@@ -10,7 +9,7 @@ type Props = {
 /**
  * A single tile containing and linking to an image
  */
-export default ({ image }: Props) => (
+const ImageTile = ({ image }: Props) => (
   <li className="col-md-4">
     <div className="wrapper">
       <Link to={`/view/${image}`} className="photo-link">
@@ -23,3 +22,5 @@ export default ({ image }: Props) => (
     </div>
   </li>
 );
+
+export default ImageTile;

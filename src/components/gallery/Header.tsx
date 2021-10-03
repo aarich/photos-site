@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default () => (
+const Header = () => (
   <nav className="navbar navbar-fixed-top" role="navigation">
     <div className="container">
       <div className="navbar-header">
@@ -11,3 +11,5 @@ export default () => (
     </div>
   </nav>
 );
+
+export default Header;
