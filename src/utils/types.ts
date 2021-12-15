@@ -1,3 +1,5 @@
+import { Reducer } from 'react';
+
 export type ExifData = ExifError | ExifSuccess;
 
 export type ExifError = { error: string };
@@ -38,3 +40,8 @@ export enum Tag {
 export type ImageInfo = {
   [image: string]: { tags: Tag[] };
 };
+
+export type ExifReducer = Reducer<
+  Record<string, ExifData>,
+  { image: string; exif: ExifData }
+>;

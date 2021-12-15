@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import ImageFooterContainer from '../../containers/single/ImageFooterContainer';
 import Copyright from '../shared/Copyright';
-import SingleViewHeader from './Header';
+import ImageHeader from './ImageHeader';
 
 type Props = {
   image: string;
@@ -18,12 +18,7 @@ const ViewImage = ({ image, newer, older, page, src }: Props) => {
   const [alt, setAlt] = useState<string>();
   return (
     <div>
-      <SingleViewHeader
-        current={image}
-        newer={newer}
-        older={older}
-        page={page}
-      />
+      <ImageHeader current={image} newer={newer} older={older} page={page} />
       <div className="img-display">
         <img src={src} alt={alt} />
       </div>

@@ -1,5 +1,3 @@
-import React from 'react';
-
 /**
  * returns file name of the image number
  * @param {string} img the number of the image (e.g. 2103)
@@ -21,8 +19,10 @@ export const chooseRandom = <T>(array: T[], avoid?: T) => {
 
   return array[index];
 };
+const development: boolean =
+  !process.env.NODE_ENV || process.env.NODE_ENV === 'development';
 
-export const isDevMode = () => '_self' in React.createElement('div');
+export const isDevMode = () => development;
 
 export const PAGE_SIZE = 12;
 

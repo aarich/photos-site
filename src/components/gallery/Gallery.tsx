@@ -1,6 +1,7 @@
 import React, { forwardRef, RefObject } from 'react';
 import { ButtonToolbar } from 'react-bootstrap';
-import { Tag, TagAggregateMode, toggleTag } from '../../utils';
+import { useAppContext } from '../../context/selectors';
+import { toggleTag } from '../../utils';
 import Filter from './filter/Filter';
 import FilterList from './filter/FilterList';
 import ImageTiles from './ImageTiles';
@@ -8,12 +9,9 @@ import Pager from './Pager';
 
 type Props = {
   images: string[];
-  selectedTags: Tag[];
   page: number;
   totalPages: number;
   onSetPage: (p: number) => void;
-  setSelectedTags: (tags: Tag[]) => void;
-  setTagMode: (mode: TagAggregateMode) => void;
   ref: RefObject<HTMLBRElement>;
 };
 
@@ -22,18 +20,9 @@ type Props = {
  * - headerImage: the chosen image to display as hero
  */
 const ViewAll = forwardRef<HTMLBRElement, Props>(
-  (
-    {
-      images,
-      selectedTags,
-      page,
-      totalPages,
-      onSetPage,
-      setSelectedTags,
-      setTagMode,
-    },
-    ref
-  ) => {
+  ({ images, page, totalPages, onSetPage }, ref) => {
+    const { setSelectedTags, setTagMode, selectedTags } = useAppContext();
+
     return (
       <>
         <div className="d-flex justify-content-center">

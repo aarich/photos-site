@@ -1,13 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import ImageFooter from '../../components/single/ImageFooter';
-import {
-  chooseRandom,
-  ExifData,
-  loadExifData,
-  useAddExif,
-  useAllImages,
-  useExifData,
-} from '../../utils';
+import { useAllImages, useExif } from '../../context/selectors';
+import { chooseRandom, ExifData, loadExifData } from '../../utils';
 
 type Props = {
   image: string;
@@ -28,8 +22,7 @@ const ImageFooterContainer = ({ image, onSetDescription }: Props) => {
   const [description, setDescription] = useState(getDescription(image));
 
   const allImages = useAllImages();
-  const cachedExif = useExifData(image);
-  const addExif = useAddExif();
+  const [cachedExif, addExif] = useExif(image);
 
   useEffect(() => {
     if (cachedExif) {

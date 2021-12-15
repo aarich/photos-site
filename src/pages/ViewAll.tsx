@@ -5,25 +5,14 @@ import Footer from '../components/gallery/Footer';
 import Gallery from '../components/gallery/Gallery';
 import Header from '../components/gallery/Header';
 import Jumbo from '../components/gallery/Jumbo';
+import { useAppContext } from '../context/selectors';
 import {
+  filterImagesByTags,
   getPageParam,
   PAGE_SIZE,
   scrollIntoViewIfNeeded,
   setURLParams,
-  Tag,
-  TagAggregateMode,
-  useImageContext,
 } from '../utils';
-import { filterImagesByTags } from '../utils/filters';
-
-type Props = {
-  headerImage: string;
-  scrollY: number;
-  setScrollY: (sy: number) => void;
-  setFilteredImages: (images: string[]) => void;
-  setSelectedTags: (tags: Tag[]) => void;
-  setTagMode: (mode: TagAggregateMode) => void;
-};
 
 const calcTotalPages = (images: string[]) =>
   Math.ceil(images.length / PAGE_SIZE);
@@ -32,18 +21,19 @@ const calcTotalPages = (images: string[]) =>
  * The gallery view of all the images
  * - headerImage: the chosen image to display as hero
  */
-const ViewAll = ({
-  headerImage,
-  scrollY,
-  setScrollY,
-  setFilteredImages,
-  setSelectedTags,
-  setTagMode,
-}: Props) => {
+const ViewAll = () => {
   const [params] = useSearchParams();
   const navigate = useNavigate();
-  const { allImages, filteredImages, selectedTags, tagMode } =
-    useImageContext();
+  const {
+    allImages,
+    filteredImages,
+    selectedTags,
+    tagMode,
+    setFilteredImages,
+    setHomeScrollY,
+    homeScrollY,
+    headerImage,
+  } = useAppContext();
   const [page, setPage] = useState(() => getPageParam(params) - 1);
   const [displayedImages, setDisplayedImages] = useState<string[]>([]);
   const [totalPages, setTotalPages] = useState(calcTotalPages(allImages));
@@ -101,18 +91,18 @@ const ViewAll = ({
   useEffect(() => {
     const handleScroll = () => {
       const position = window.pageYOffset;
-      setScrollY(position);
+      setHomeScrollY(position);
     };
     window.addEventListener('scroll', handleScroll, { passive: true });
 
     return () => {
       window.removeEventListener('scroll', handleScroll);
     };
-  }, [setScrollY]);
+  }, [setHomeScrollY]);
 
   useEffect(() => {
     // @ts-expect-error https://github.com/microsoft/TypeScript-DOM-lib-generator/issues/1195
-    window.scroll({ top: scrollY, behavior: 'instant' });
+    window.scroll({ top: homeScrollY, behavior: 'instant' });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -128,9 +118,6 @@ const ViewAll = ({
         onSetPage={setPageAndScroll}
         page={page}
         ref={tilesRef}
-        selectedTags={selectedTags}
-        setSelectedTags={setSelectedTags}
-        setTagMode={setTagMode}
         totalPages={totalPages}
       />
       <Footer />

@@ -13,7 +13,7 @@ type Props = {
  * - {newer, older} ids of neighboring photos
  * - page the page this image is on
  */
-const SingleViewHeader = ({ current, newer, older, page }: Props) => {
+const ImageHeader = ({ current, newer, older, page }: Props) => {
   const className = older && newer ? '' : 'disabled-link';
 
   return (
@@ -31,7 +31,7 @@ const SingleViewHeader = ({ current, newer, older, page }: Props) => {
           Older&nbsp;&rarr;
         </Link>
       </div>
-      <div className="col-md-6">
+      <div className="col-md-6 d-none d-md-block">
         <span className="float-end px-2">
           Want to use this photo?{' '}
           <a
@@ -47,4 +47,4 @@ const SingleViewHeader = ({ current, newer, older, page }: Props) => {
   );
 };
 
-export default SingleViewHeader;
+export default ImageHeader;

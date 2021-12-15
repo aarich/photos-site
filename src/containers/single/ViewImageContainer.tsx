@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import ViewImage from '../../components/single/ViewImage';
-import { PAGE_SIZE, toName, useFilteredImages } from '../../utils';
+import { useFilteredImages } from '../../context/selectors';
+import { PAGE_SIZE, toName } from '../../utils';
 
 const setLinks = (
   setNewer: (newer: string) => void,

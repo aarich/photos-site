@@ -27,14 +27,15 @@ const ImageFooter = ({ image, description, exifData, randomImage }: Props) => {
 
   return (
     <section>
-      <div className="container content-section text-center"></div>
-      <p className="text-center">{description}</p>
-      <div className="row">
-        {dataPoints.map((key) => (
-          <div className="col-md-3 stats" key={key}>
-            <p>{exifData[key]}</p>
-          </div>
-        ))}
+      <div className="container content-section text-center">
+        <p className="text-center">{description}</p>
+        <div className="row">
+          {dataPoints.map((key) => (
+            <div className="col-md-3 stats" key={key}>
+              <p>{exifData[key]}</p>
+            </div>
+          ))}
+        </div>
       </div>
       <div>
         <ul className="list-inline intro">
@@ -54,6 +55,18 @@ const ImageFooter = ({ image, description, exifData, randomImage }: Props) => {
             </Link>
           </li>
         </ul>
+      </div>
+      <div className="d-md-none text-center mb-3">
+        <span className="px-2">
+          Want to use this photo?{' '}
+          <a
+            href={`https://mrarich.com/contact?m=Can you send me an original-quality version of image ${image}?`}
+            target="_blank"
+            rel="noreferrer"
+          >
+            Request a free original-quality copy
+          </a>
+        </span>
       </div>
     </section>
   );
