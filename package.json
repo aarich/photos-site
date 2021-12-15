@@ -2,98 +2,44 @@
   "name": "photos-site",
   "version": "0.1.0",
   "private": true,
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test"
+  },
   "importSort": {
     ".js, .jsx, .es6, .es, .mjs, .ts, .tsx": {
       "style": "module"
     }
   },
   "dependencies": {
-    "bootstrap": "^5.1.1",
+    "bootstrap": "^5.1.3",
     "history": "^4.10.1",
     "install": "^0.13.0",
-    "npm": "^7.24.1",
+    "npm": "^8.3.0",
     "react": "^17.0.2",
-    "react-bootstrap": "^1.6.4",
+    "react-bootstrap": "^2.0.3",
     "react-dom": "^17.0.2",
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.3",
-    "typescript": "^4.4.3",
-    "web-vitals": "^2.1.0"
-  },
-  "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test"
-  },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "airbnb-typescript",
-      "airbnb/hooks",
-      "plugin:@typescript-eslint/recommended",
-      "plugin:jest/recommended",
-      "prettier"
-    ],
-    "plugins": [
-      "react",
-      "@typescript-eslint"
-    ],
-    "env": {
-      "browser": true,
-      "es6": true
-    },
-    "globals": {
-      "Atomics": "readonly",
-      "SharedArrayBuffer": "readonly"
-    },
-    "parser": "@typescript-eslint/parser",
-    "parserOptions": {
-      "ecmaFeatures": {
-        "jsx": true
-      },
-      "ecmaVersion": 2018,
-      "sourceType": "module",
-      "project": "./tsconfig.json"
-    },
-    "rules": {
-      "react/prop-types": "off",
-      "react/jsx-one-expression-per-line": "off",
-      "@typescript-eslint/explicit-module-boundary-types": "off",
-      "radix": "off",
-      "@typescript-eslint/comma-dangle": "off",
-      "react/no-array-index-key": "off",
-      "object-curly-newline": [
-        "error",
-        {
-          "multiline": true
-        }
-      ]
-    }
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
+    "typescript": "^4.5.4",
+    "web-vitals": "^2.1.2"
   },
   "devDependencies": {
-    "@types/node": "^16.10.2",
-    "@types/react": "^17.0.26",
+    "@types/node": "^16.11.12",
+    "@types/react": "^17.0.37",
     "@types/react-dom": "^17.0.9",
     "@types/react-router-dom": "^5.1.8",
-    "@typescript-eslint/eslint-plugin": "^4.32.0",
-    "@typescript-eslint/parser": "^4.32.0",
-    "eslint-config-airbnb": "^18.2.1",
-    "eslint-config-airbnb-base": "^14.2.1",
-    "eslint-config-airbnb-typescript": "^14.0.0",
+    "@typescript-eslint/eslint-plugin": "^5.7.0",
+    "@typescript-eslint/parser": "^5.7.0",
+    "eslint-config-airbnb": "^19.0.2",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-config-airbnb-typescript": "^16.1.0",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-prettier": "^4.0.0",
-    "prettier": "^2.4.1"
-  }
+    "prettier": "^2.5.1"
+  },
+  "browserslist": [
+    "defaults"
+  ]
 }
