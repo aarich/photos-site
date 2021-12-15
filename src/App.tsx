@@ -1,44 +1,22 @@
-import React, { useEffect, useState } from 'react';
-import { Route, Router, Switch, useLocation } from 'react-router-dom';
+import React, { Reducer, useEffect, useReducer, useState } from 'react';
+import { Route, Router, Switch } from 'react-router-dom';
+import NoMatch from './pages/NoMatch';
 import View from './pages/View';
 import ViewAll from './pages/ViewAll';
 import {
   chooseRandom,
+  ExifData,
   history,
   ImageContext,
-  isDevMode,
+  loadImageNames,
   Tag,
   TagAggregateMode,
 } from './utils';
 
-const loadImageNames = (setHeader: (h: string) => void) =>
-  isDevMode()
-    ? Promise.resolve(
-        Array(30)
-          .fill(0)
-          .map((_, i) => `${i}`)
-      ).then((result) => {
-        setHeader(result[0]);
-        return result;
-      })
-    : fetch('/images', { cache: 'no-cache' })
-        .then((response) => response.json())
-        .then((data) => {
-          setHeader(chooseRandom(data.images));
-          return data.images;
-        });
-
-function NoMatch() {
-  const location = useLocation();
-
-  return (
-    <div>
-      <h3>
-        No match for &apos;<code>{location.pathname}</code>&apos;
-      </h3>
-    </div>
-  );
-}
+type ExifReducer = Reducer<
+  Record<string, ExifData>,
+  { image: string; exif: ExifData }
+>;
 
 const App = () => {
   // Constants throughout the app
@@ -46,12 +24,17 @@ const App = () => {
   const [filteredImages, setFilteredImages] = useState<string[]>([]);
   const [selectedTags, setSelectedTags] = useState<Tag[]>([]);
   const [tagMode, setTagMode] = useState(TagAggregateMode.Or);
+  const [exifs, addExif] = useReducer<ExifReducer>(
+    (prev, { image, exif }) => ({ ...prev, [image]: exif }),
+    {}
+  );
 
   const [headerImage, setHeaderImage] = useState('');
   const [scrollY, setScrollY] = useState(0);
 
   useEffect(() => {
-    loadImageNames(setHeaderImage).then((images) => {
+    loadImageNames().then((images) => {
+      setHeaderImage(chooseRandom(images));
       setImages(images);
       setFilteredImages(images);
     });
@@ -59,7 +42,14 @@ const App = () => {
 
   return (
     <ImageContext.Provider
-      value={{ allImages, filteredImages, selectedTags, tagMode }}
+      value={{
+        allImages,
+        filteredImages,
+        selectedTags,
+        tagMode,
+        exifs,
+        addExif,
+      }}
     >
       <Router history={history}>
         <div className="body">
@@ -67,7 +57,7 @@ const App = () => {
             <Route path="/view">
               <View />
             </Route>
-            <Route path="/">
+            <Route exact path="/">
               <ViewAll
                 {...{
                   headerImage,

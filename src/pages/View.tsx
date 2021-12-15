@@ -1,6 +1,6 @@
 import React from 'react';
 import { Route, Switch, useHistory, useRouteMatch } from 'react-router-dom';
-import ViewImage from '../components/single/ViewImage';
+import ViewImageContainer from '../containers/single/ViewImageContainer';
 
 const ReturnHome = () => {
   const history = useHistory();
@@ -18,7 +18,7 @@ const View = () => {
     <div>
       <Switch>
         <Route path={`${match.path}/:image`}>
-          <ViewImage />
+          <ViewImageContainer />
         </Route>
         <Route path={match.path}>
           <ReturnHome />

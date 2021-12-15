@@ -1,10 +1,15 @@
 import React, { useEffect, useReducer, useRef, useState } from 'react';
-import About from '../components/gallery/About';
-import Footer from '../components/gallery/Footer';
-import Gallery from '../components/gallery/Gallery';
-import Header from '../components/gallery/Header';
-import Jumbo from '../components/gallery/Jumbo';
+import { ButtonToolbar } from 'react-bootstrap';
+import About from '../../components/gallery/About';
+import Filter from '../../components/gallery/filter/Filter';
+import FilterList from '../../components/gallery/filter/FilterList';
+import Footer from '../../components/gallery/Footer';
+import Header from '../../components/gallery/Header';
+import ImageTiles from '../../components/gallery/ImageTiles';
+import Jumbo from '../../components/gallery/Jumbo';
+import Pager from '../../components/gallery/Pager';
 import {
+  filterImagesByTags,
   getPageParam,
   history,
   PAGE_SIZE,
@@ -12,9 +17,9 @@ import {
   setURLParams,
   Tag,
   TagAggregateMode,
+  toggleTag,
   useImageContext,
-} from '../utils';
-import { filterImagesByTags } from '../utils/filters';
+} from '../../utils';
 
 type Props = {
   headerImage: string;
@@ -114,16 +119,42 @@ const ViewAll = ({
       <Header />
       <Jumbo image={headerImage} />
       <About />
-      <Gallery
-        images={displayedImages}
-        onSetPage={setPageAndScroll}
-        page={page}
-        ref={tilesRef}
-        selectedTags={selectedTags}
-        setSelectedTags={setSelectedTags}
-        setTagMode={setTagMode}
-        totalPages={totalPages}
-      />
+
+      <div className="d-flex justify-content-center">
+        <ButtonToolbar className="d-flex justify-content-center">
+          <Pager current={page} total={totalPages} setPage={setPageAndScroll} />
+          <Filter setSelectedTags={setSelectedTags} setTagMode={setTagMode} />
+        </ButtonToolbar>
+      </div>
+
+      {selectedTags.length > 0 && (
+        <div className="d-flex justify-content-center">
+          <FilterList
+            selectedTags={selectedTags}
+            onPressTag={(tag) => toggleTag(tag, selectedTags, setSelectedTags)}
+          />
+        </div>
+      )}
+
+      <br ref={tilesRef} />
+
+      {displayedImages.length === 0 ? (
+        <div
+          style={{ minHeight: 400 * 2 }}
+          className="d-flex justify-content-center"
+        >
+          <h2>No Images Here!</h2>
+        </div>
+      ) : (
+        <ImageTiles images={displayedImages} />
+      )}
+
+      <br />
+
+      <div className="d-flex justify-content-center">
+        <Pager current={page} total={totalPages} setPage={setPageAndScroll} />
+      </div>
+
       <Footer />
     </>
   );

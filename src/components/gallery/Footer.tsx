@@ -1,5 +1,5 @@
 import React from 'react';
-import CRFooter from '../shared/Footer';
+import Copyright from '../shared/Copyright';
 
 const links = [
   { h: '/feed', n: 'RSS' },
@@ -36,7 +36,7 @@ const Footer = () => (
       </div>
     </section>
 
-    <CRFooter />
+    <Copyright />
   </>
 );
 

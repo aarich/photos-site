@@ -25,3 +25,13 @@ export const chooseRandom = <T>(array: T[], avoid?: T) => {
 export const isDevMode = () => '_self' in React.createElement('div');
 
 export const PAGE_SIZE = 12;
+
+export const scrollIntoViewIfNeeded = <T extends HTMLElement>(target: T) => {
+  if (target.getBoundingClientRect().bottom > window.innerHeight) {
+    target.scrollIntoView(false);
+  }
+
+  if (target.getBoundingClientRect().top < 0) {
+    target.scrollIntoView();
+  }
+};

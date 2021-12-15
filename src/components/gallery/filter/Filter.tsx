@@ -1,6 +1,6 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { Button, ButtonGroup, Dropdown, DropdownButton } from 'react-bootstrap';
-import { ImageContext, Tag, TagAggregateMode } from '../../../utils';
+import { Tag, TagAggregateMode, useImageContext } from '../../../utils';
 import { toggleTag } from '../../../utils/filters';
 
 type Props = {
@@ -13,7 +13,7 @@ const Filter = ({ setSelectedTags, setTagMode }: Props) => {
   tagOptions.sort();
   const tagModes = Object.values(TagAggregateMode);
 
-  const { tagMode, selectedTags } = useContext(ImageContext);
+  const { tagMode, selectedTags } = useImageContext();
 
   return (
     <>

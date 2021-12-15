@@ -3,7 +3,7 @@ import React from 'react';
 /**
  * Simple copyright component
  */
-const Footer = () => (
+const Copyright = () => (
   <footer>
     <div className="container text-center">
       <p className="credits">&copy; {new Date().getFullYear()} Alex Rich</p>
@@ -11,4 +11,4 @@ const Footer = () => (
   </footer>
 );
 
-export default Footer;
+export default Copyright;

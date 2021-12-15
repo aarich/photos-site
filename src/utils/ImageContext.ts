@@ -1,5 +1,5 @@
-import { createContext } from 'react';
-
+import { createContext, Dispatch, useContext } from 'react';
+import { ExifData } from '.';
 import { Tag, TagAggregateMode } from './types';
 
 type AppState = {
@@ -7,6 +7,8 @@ type AppState = {
   filteredImages: string[];
   selectedTags: Tag[];
   tagMode: TagAggregateMode;
+  exifs: Record<string, ExifData>;
+  addExif: Dispatch<{ image: string; exif: ExifData }>;
 };
 
 const initialState: AppState = {
@@ -14,7 +16,10 @@ const initialState: AppState = {
   filteredImages: [],
   selectedTags: [],
   tagMode: TagAggregateMode.Or,
+  exifs: {},
+  addExif: () => null,
 };
 
-const ImageContext = createContext<AppState>(initialState);
-export default ImageContext;
+export const ImageContext = createContext<AppState>(initialState);
+
+export const useImageContext = () => useContext(ImageContext);
