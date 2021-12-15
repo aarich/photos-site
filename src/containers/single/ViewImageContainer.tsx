@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import ViewImage from '../../components/single/ViewImage';
-import { history, PAGE_SIZE, toName, useFilteredImages } from '../../utils';
+import { PAGE_SIZE, toName, useFilteredImages } from '../../utils';
 
 const setLinks = (
   setNewer: (newer: string) => void,
@@ -26,6 +26,7 @@ const setLinks = (
  * View a single image and its data
  */
 const ViewImageContainer = () => {
+  const navigate = useNavigate();
   const filteredImages = useFilteredImages();
   const { image } = useParams<{ image: string }>();
   const [newer, setNewer] = useState('');
@@ -34,35 +35,36 @@ const ViewImageContainer = () => {
 
   useEffect(() => {
     if (filteredImages.length === 0) {
-      return;
+      // wait for now
+    } else if (!image || !filteredImages.includes(image)) {
+      navigate('/', { replace: true });
+    } else {
+      setLinks(setNewer, setOlder, setPage, image, filteredImages);
     }
-
-    if (!filteredImages.includes(image)) {
-      history.push('/notfound');
-      return;
-    }
-
-    setLinks(setNewer, setOlder, setPage, image, filteredImages);
-  }, [image, filteredImages]);
+  }, [image, filteredImages, navigate]);
 
   useEffect(() => {
     const handler = (e: KeyboardEvent) => {
       if (e.key === 'Escape') {
-        history.push(`/?p=${page}`);
+        navigate(`/?p=${page}`);
       } else if (e.key === 'ArrowLeft') {
-        history.push(`/view/${newer}`);
+        navigate(`/view/${newer}`);
       } else if (e.key === 'ArrowRight') {
-        history.push(`/view/${older}`);
+        navigate(`/view/${older}`);
       }
     };
 
     document.body.addEventListener('keyup', handler);
 
     return () => document.body.removeEventListener('keyup', handler);
-  }, [newer, older, page]);
+  }, [newer, older, page, navigate]);
 
   const w = window.innerWidth;
   const h = window.innerHeight;
+  if (!image) {
+    return null;
+  }
+
   const src = `/resize?img=${toName(image)}&w=${w}&h=${h}`;
 
   return (

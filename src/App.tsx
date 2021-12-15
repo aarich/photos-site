@@ -1,12 +1,11 @@
 import React, { Reducer, useEffect, useReducer, useState } from 'react';
-import { Route, Router, Switch } from 'react-router-dom';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import ViewImageContainer from './containers/single/ViewImageContainer';
 import NoMatch from './pages/NoMatch';
-import View from './pages/View';
 import ViewAll from './pages/ViewAll';
 import {
   chooseRandom,
   ExifData,
-  history,
   ImageContext,
   loadImageNames,
   Tag,
@@ -51,30 +50,31 @@ const App = () => {
         addExif,
       }}
     >
-      <Router history={history}>
+      <BrowserRouter>
         <div className="body">
-          <Switch>
-            <Route path="/view">
-              <View />
+          <Routes>
+            <Route
+              path="/"
+              element={
+                <ViewAll
+                  {...{
+                    headerImage,
+                    scrollY,
+                    setScrollY,
+                    setFilteredImages,
+                    setTagMode,
+                    setSelectedTags,
+                  }}
+                />
+              }
+            />
+            <Route path="view">
+              <Route path=":image" element={<ViewImageContainer />} />
             </Route>
-            <Route exact path="/">
-              <ViewAll
-                {...{
-                  headerImage,
-                  scrollY,
-                  setScrollY,
-                  setFilteredImages,
-                  setTagMode,
-                  setSelectedTags,
-                }}
-              />
-            </Route>
-            <Route path="*">
-              <NoMatch />
-            </Route>
-          </Switch>
+            <Route path="*" element={<NoMatch />} />
+          </Routes>
         </div>
-      </Router>
+      </BrowserRouter>
     </ImageContext.Provider>
   );
 };

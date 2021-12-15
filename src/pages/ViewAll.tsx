@@ -1,4 +1,5 @@
 import React, { useEffect, useReducer, useRef, useState } from 'react';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import About from '../components/gallery/About';
 import Footer from '../components/gallery/Footer';
 import Gallery from '../components/gallery/Gallery';
@@ -6,7 +7,6 @@ import Header from '../components/gallery/Header';
 import Jumbo from '../components/gallery/Jumbo';
 import {
   getPageParam,
-  history,
   PAGE_SIZE,
   scrollIntoViewIfNeeded,
   setURLParams,
@@ -40,9 +40,11 @@ const ViewAll = ({
   setSelectedTags,
   setTagMode,
 }: Props) => {
+  const [params] = useSearchParams();
+  const navigate = useNavigate();
   const { allImages, filteredImages, selectedTags, tagMode } =
     useImageContext();
-  const [page, setPage] = useState(() => getPageParam() - 1);
+  const [page, setPage] = useState(() => getPageParam(params) - 1);
   const [displayedImages, setDisplayedImages] = useState<string[]>([]);
   const [totalPages, setTotalPages] = useState(calcTotalPages(allImages));
   const [filteredImagesHaveBeenSet, notifyFilteredImagesHaveBeenSet] =
@@ -64,9 +66,16 @@ const ViewAll = ({
     setTotalPages(calculatedTotalPages);
     setPage(clampedPage);
     if (clampedPage !== page) {
-      setURLParams(clampedPage);
+      setURLParams(clampedPage, params, navigate);
     }
-  }, [allImages.length, filteredImages, page, filteredImagesHaveBeenSet]);
+  }, [
+    allImages.length,
+    filteredImages,
+    page,
+    params,
+    filteredImagesHaveBeenSet,
+    navigate,
+  ]);
 
   useEffect(() => {
     if (allImages.length > 0) {
@@ -86,7 +95,7 @@ const ViewAll = ({
       scrollIntoViewIfNeeded(tilesRef.current);
     }
 
-    setURLParams(newPage);
+    setURLParams(newPage, params, navigate);
   };
 
   useEffect(() => {
@@ -107,7 +116,7 @@ const ViewAll = ({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  useEffect(() => history.listen(() => setPage(getPageParam() - 1)), []);
+  useEffect(() => setPage(getPageParam(params) - 1), [params]);
 
   return (
     <>

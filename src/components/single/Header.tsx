@@ -35,7 +35,7 @@ const SingleViewHeader = ({ current, newer, older, page }: Props) => {
         <span className="float-end px-2">
           Want to use this photo?{' '}
           <a
-            href={`https://mrarich.com/contact?m=Can you send me an original-quality version of "${current}"?`}
+            href={`https://mrarich.com/contact?m=Can you send me an original-quality version of image ${current}?`}
             target="_blank"
             rel="noreferrer"
           >
