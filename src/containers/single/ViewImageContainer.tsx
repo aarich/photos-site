@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import ViewImage from '../../components/single/ViewImage';
 import { useFilteredImages } from '../../context/selectors';

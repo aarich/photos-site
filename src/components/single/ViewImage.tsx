@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import ImageFooterContainer from '../../containers/single/ImageFooterContainer';
 import Copyright from '../shared/Copyright';
 import ImageHeader from './ImageHeader';

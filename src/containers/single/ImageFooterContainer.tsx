@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import ImageFooter from '../../components/single/ImageFooter';
 import { useAllImages, useExif } from '../../context/selectors';
 import { chooseRandom, ExifData, loadExifData } from '../../utils';

@@ -1,4 +1,4 @@
-import React, { forwardRef, RefObject } from 'react';
+import { forwardRef, RefObject } from 'react';
 import { ButtonToolbar } from 'react-bootstrap';
 import { useAppContext } from '../../context/selectors';
 import { toggleTag } from '../../utils';

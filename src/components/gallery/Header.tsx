@@ -1,5 +1,3 @@
-import React from 'react';
-
 const Header = () => (
   <nav className="navbar navbar-fixed-top" role="navigation">
     <div className="container">

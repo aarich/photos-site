@@ -1,4 +1,3 @@
-import React from 'react';
 import { Button, ButtonGroup, Dropdown, DropdownButton } from 'react-bootstrap';
 import { useAppContext } from '../../../context/selectors';
 import { Tag, TagAggregateMode, toggleTag } from '../../../utils';

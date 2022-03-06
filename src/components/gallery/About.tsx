@@ -1,5 +1,3 @@
-import React from 'react';
-
 const About = () => (
   <section id="about">
     <div className="container content-section text-center intro px-4">
