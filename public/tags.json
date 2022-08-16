@@ -129,5 +129,20 @@
   "9754": { "tags": ["Mountain", "National Park"] },
   "10045": { "tags": ["Mountain", "Flowers"] },
   "10166": { "tags": ["National Park", "Mountain"] },
-  "10230": { "tags": ["National Park", "Ocean"] }
+  "10230": { "tags": ["National Park", "Ocean"] },
+  "20078": { "tags": ["Snow", "Lake"] },
+  "20206": { "tags": ["Ocean", "Beach", "Sunset"] },
+  "20577": { "tags": ["Sunset", "National Park", "Mountain"] },
+  "20705": { "tags": ["Macro", "Flowers", "National Park", "Mountain"] },
+  "20949": { "tags": ["Mountain", "National Park", "Sunset"] },
+  "21368": { "tags": ["Mountain", "International", "National Park", "Snow"] },
+  "21388": {
+    "tags": [
+      "Mountain",
+      "International",
+      "National Park",
+      "Snow",
+      "Perspective"
+    ]
+  }
 }

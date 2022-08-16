@@ -1,14 +1,10 @@
-import { FC, useEffect, useReducer, useState } from 'react';
-import { ExifReducer, Tag, TagAggregateMode } from '../utils';
-import { AppContext } from './AppContext';
+import { PropsWithChildren, useEffect, useReducer, useState } from "react";
+import { ExifReducer, Tag, TagAggregateMode } from "../utils";
+import { AppContext } from "./AppContext";
 
-type Props = { allImages: string[]; headerImage: string };
+type Props = PropsWithChildren<{ allImages: string[]; headerImage: string }>;
 
-const AppContextProvider: FC<Props> = ({
-  children,
-  allImages,
-  headerImage,
-}) => {
+const AppContextProvider = ({ children, allImages, headerImage }: Props) => {
   const [homeScrollY, setHomeScrollY] = useState(0);
   const [filteredImages, setFilteredImages] = useState<string[]>([]);
   const [selectedTags, setSelectedTags] = useState<Tag[]>([]);
