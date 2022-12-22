@@ -144,5 +144,17 @@
       "Snow",
       "Perspective"
     ]
-  }
+  },
+  "21518": { "tags": ["Mountain", "National Park"]  },
+  "21616": { "tags": ["Lake","National Park","Mountain"] },
+  "21655": { "tags": ["Lake", "Wildlife", "Mountain", "National Park", "Snow"] },
+  "21704": { "tags": ["Mountain", "National Park", "Snow","Lake"] },
+  "22012": { "tags": ["National Park","Perspective"] },
+  "22020": { "tags": ["National Park", "Mountain"] },
+  "22307": { "tags": ["Fall","Snow", "International"] },
+  "22394": { "tags": ["Sunset", "International"] },
+  "22424": { "tags": ["Fall","Perspective","International"] },
+  "22491": { "tags": ["Sunset", "Perspective", "International"] },
+  "22622": { "tags": ["Perspective", "Ocean"] },
+  "22657": { "tags": ["Perspective", "Ocean", "National Park" ] }
 }
