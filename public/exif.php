@@ -1,4 +1,4 @@
-<?php 
+<?php
 session_start();
 
 header('Content-Type: application/json');
@@ -10,21 +10,18 @@ $img = $_GET['img'];
 $exif = @exif_read_data($img, 0, true);
 
 $date = date('F Y', strtotime($exif["EXIF"]["DateTimeOriginal"]));
-$time = date('g:i a', $exif["FILE"]["FileDateTime"]);
-$fnumber = $exif["EXIF"]["FNUMBER"];
 $iso = $exif["EXIF"]["ISOSpeedRatings"];
 $shutter = $exif["EXIF"]["ExposureTime"];
 $aperture = $exif["COMPUTED"]["ApertureFNumber"];
 $focal = $exif["EXIF"]["FocalLength"];
 $camera = $exif["IFD0"]["Model"];
-$a = substr($camera, 0, 1) === "i" ? "an" : "a";
 
-$result->aperture = $aperture;
-$result->iso = "ISO".$iso;
-$result->shutter = $shutter." s";
-$result->focal = $focal." mm";
-$result->date = $date;
-$result->camera = $camera;
-$result->success = true;
+$result = array();
+$result['aperture'] = $aperture;
+$result['iso'] = "ISO".$iso;
+$result['shutter'] = $shutter." s";
+$result['focal'] = $focal." mm";
+$result['date'] = $date;
+$result['camera'] = $camera;
+$result['success'] = true;
 echo json_encode($result);
-?>

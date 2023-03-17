@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-include('utils.php');
+include_once('utils.php');
 
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
@@ -11,9 +11,8 @@ header('Content-Type: application/xml');
 header('Cache-control: max-age=60');
 
 $baseUrl = "https://photos.mrarich.com";
-
-echo '<?xml version="1.0" encoding="utf-8"?'.">\n";
 ?>
+<?xml version="1.0" encoding="utf-8"?>
 
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
 <channel>
@@ -28,7 +27,7 @@ $img_dir = "img";
 $imgs = array_filter(glob($img_dir.'/*.*'), 'is_file');
 $imgs = array_reverse($imgs);
 
-foreach($imgs as $img) {
+foreach ($imgs as $img) {
 	$exif = @exif_read_data($img, 0, true);
 	$date = date("D, d M Y H:i:s T", strtotime($exif["EXIF"]["DateTimeOriginal"]));
 	$title = date('D, F j Y', strtotime($exif["EXIF"]["DateTimeOriginal"]));

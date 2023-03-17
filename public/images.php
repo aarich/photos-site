@@ -1,8 +1,8 @@
-<?php 
+<?php
 session_start();
 header('Content-Type: application/json');
 header('Cache-control: max-age=60');
-include('utils.php');
+include_once('utils.php');
 
 $img_dir = "img";
 
@@ -14,8 +14,9 @@ function sorter(string $str1, string $str2): int {
 $imgs = array_map('cleanName', $imgs);
 usort($imgs, 'sorter');
 
-$result->images = array_reverse($imgs);
-$result->success = true;
+$result = [
+    'images' => array_reverse($imgs),
+    'success' => true
+];
 
 echo json_encode($result);
-?>
